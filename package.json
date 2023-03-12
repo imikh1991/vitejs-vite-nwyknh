@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix --max-warnings=0",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -23,8 +24,14 @@
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "prettier": "2.8.4",
     "typescript": "^4.9.3",
     "vite": "^4.2.0-beta.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.--write": "prettier --write"
   }
 }
