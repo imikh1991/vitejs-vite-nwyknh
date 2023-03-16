@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 // import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import reactLogo from '../src/assets/react.svg';
 import viteLogo from '/vite.svg';
 // import bootstrap from 'bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -27,11 +27,7 @@ function SearchBar() {
       <input type="text" name="login" placeholder="Search here"/>
       <button type="submit">Send</button>
     </form>
-
-
         </section>
-
-
   );
 }
 

@@ -60,16 +60,17 @@ h2 {
 }
 
 .card:hover {
-  /* BEGIN (write your solution here) */
+  
   position: relative;
   top: -15px;
   left: -10px;
-  /* END */
-  border-radius: 5px;
-  color: #fff;
 
-  background: 
-    linear-gradient(45deg, #4158d0, #c850c0 40%, #ffcc70 90%);
+  border-radius: 5px;
+  
+  color: #1e1f26;
+  background: #03dac6;
+  transition: all 0.9s ease;
+
   cursor: pointer;
 }
 
