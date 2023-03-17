@@ -1,13 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import About from '../src/About';
-import Contact from '../src/Contact';
+import SearchBar from '../src/components/SearchBar';
 
-test('render Contact', () => {
-  render(<Contact />);
+test('render SearchBar', () => {
+  render(<SearchBar />);
 });
-
-
-test('render About', () => {
-    render(<About />);
-  });

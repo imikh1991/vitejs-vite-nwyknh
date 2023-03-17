@@ -1,13 +1,8 @@
-
-form {
+.searchBar {
     display: flex;
     justify-content: space-around;
     gap: 10px;
     max-width: 99%;
-}
-.SearchBar {
-    display: flex;
-    justify-content: space-around;
     margin-bottom: 20px;
     max-width: 99%;
 }

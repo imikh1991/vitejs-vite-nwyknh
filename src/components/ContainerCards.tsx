@@ -1,6 +1,6 @@
 // import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+// import reactLogo from './assets/react.svg';
+// import viteLogo from '/vite.svg';
 // import bootstrap from 'bootstrap';
 //import React, {createElement as e} from React;
 import Button from 'react-bootstrap/Button';
@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './ContainerCards.css';
+import '../assets/styles/ContainerCards.css';
 // import { createElement as e } from 'react';
 
 function ContainerCards() {
@@ -46,7 +46,6 @@ function ContainerCards() {
           <Col>{cardInfo.map(renderCard)}</Col>
         </Row>
       </Container>
-       
     ); 
 }
 

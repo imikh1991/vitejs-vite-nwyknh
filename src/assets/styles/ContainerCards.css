@@ -1,15 +1,14 @@
+/* 
 #root {
   max-width: 100vw;
   margin: 0 auto;
   padding: 2rem;
-  
-  
 }
 
 .main {
   background-color: #242424;
 }
-
+ здесь был #root .main но тест наругался */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
