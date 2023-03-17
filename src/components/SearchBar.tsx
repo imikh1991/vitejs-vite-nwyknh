@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 
 // import { useState } from 'react';
@@ -21,12 +23,12 @@ function SearchBar() {
     return ( 
         <section className="searchBar">
 
-<form action="https://echo.htmlacademy.ru/courses" method="post">
-      <input type="text" name="login" placeholder="Search here"/>
-      <button type="submit">Send</button>
-    </form>
+            <form action="https://echo.htmlacademy.ru/courses" method="post">
+                <input type="text" name="login" placeholder="Search here"/>
+                <button type="submit">Send</button>
+            </form>
         </section>
-  );
+    );
 }
 
 export default SearchBar;

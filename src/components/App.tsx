@@ -1,4 +1,6 @@
-import { Routes, Route } from "react-router-dom"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
+import { Routes, Route, Link } from "react-router-dom"
 import { render } from 'react-dom';
 import React from 'react';
 import * as ReactDOMClient from 'react-dom/client';
@@ -11,13 +13,16 @@ import Header from './Header';
 import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-      <Home />
-      </BrowserRouter>
-    </div>
-  )
+    return (
+        <div className="App">
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="about" element={ <About/> } />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        
+        </div>
+    )
 }
 
 /*const container = document.getElementById("root") as HTMLElement;

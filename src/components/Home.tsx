@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import { Link, BrowserRouter } from "react-router-dom";
 import React from 'react';
 import { Routes, Route } from "react-router-dom"
@@ -10,21 +12,17 @@ import SearchBar from "./SearchBar";
 import Header from './Header';
 import '../assets/styles/main.css';
 import '../assets/styles/Home.css';
-
+import '../assets/styles/Header.css';
+import '../assets/styles/SearchBar.css';
 
 function Home() {
-  return (
-<div className="Home">
-<div>
-  <ul>
-            <li className="nav-tab"><Link to="/">Home</Link></li>
-            <li className="nav-tab"><Link to="about">About</Link></li>  
-            <li className="nav-tab"><Link to="notFound">404</Link></li>  
-          </ul>
-    </div>
-    </div>
-  
-  );
+    return (
+        <div className="Home">
+            <Header /> 
+            <SearchBar /> 
+            <ContainerCards /> 
+        </div>
+    );
 }
 
 /*

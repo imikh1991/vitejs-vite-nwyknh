@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import reactLogo from '../assets/react.svg';
@@ -17,20 +19,19 @@ import About from './About';
 function Header() {
     // BootStrap naming 
     // Grid Layout for Bar
-        const header = <header>
+    const header = <header>
         <div className="name w30">
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
+            <a href="https://reactjs.org" target="_blank" rel="noreferrer">
+                <img src={reactLogo} className="logo react" alt="React logo" />
+            </a>
         </div>
         <nav className="w50">
-          <ul>
-            <li className="nav-tab"><Link to="/">Home</Link></li>
-            <li className="nav-tab"><Link to="about">About</Link></li>  
-            <li className="nav-tab"><Link to="notFound">404</Link></li>  
-          </ul>
+            <ul>
+                <li className="nav-tab"><Link to="/">Home</Link></li>
+                <li className="nav-tab"><Link to="about">About</Link></li>   
+            </ul>
         </nav>
-      </header>
+    </header>
 
     return ( 
 
@@ -38,7 +39,8 @@ function Header() {
             {header}
         </section>
 
-  );
+    );
 };
 
 export default Header;
+
