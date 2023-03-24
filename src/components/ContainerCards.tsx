@@ -1,17 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
-// import { useState } from 'react';
-// import reactLogo from './assets/react.svg';
-// import viteLogo from '/vite.svg';
-// import bootstrap from 'bootstrap';
-//import React, {createElement as e} from React;
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../assets/styles/ContainerCards.css';
-// import { createElement as e } from 'react';
 
 function ContainerCards() {
     const cardInfo = [
@@ -20,7 +12,7 @@ function ContainerCards() {
         {image: "https://rickandmortyapi.com/api/character/avatar/789.jpeg", title: "Card Title 3", text: "Some quick example title and make up content"}
     ];
 
-    const renderCard = (card, index) => {
+    const renderCard = (card: any, index: any) => {
     // one card 
         return (
             <Card style={{ width: '19rem', margin: '10px'}} key={index}>
@@ -35,10 +27,7 @@ function ContainerCards() {
             </Card>
         )
     }
-    // BootStrap naming 
-    // Render to the page  
-    // в объекте row у тебя должен быть 
-    // цикл forEach, который создаст объекты card
+   
     cardInfo.forEach(element => console.log(element)); 
     return (
         <Container>
