@@ -1,0 +1,12 @@
+.searchBar {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    max-width: 99%;
+    margin-bottom: 20px;
+    max-width: 99%;
+}
+
+input {
+    max-width: 99%;
+}
