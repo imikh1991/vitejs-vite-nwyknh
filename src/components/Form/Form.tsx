@@ -1,39 +1,96 @@
 import React, { useState, createRef } from 'react';
 
 function Form() {
-    const [setFormData] = useState({});
+    const [formData, setFormData] = useState({});
     const [cards, setCards] = useState([]);
-    const [formErrors] = useState({});
-    const inputRef = createRef();
-    const dateRef = createRef();
-    const selectRef = createRef();
-    const checkboxRef = createRef();
-    const radioRef = createRef();
-    const fileRef = createRef();
+    const [formErrors, setFormErrors] = useState({});
+    const inputRef = createRef<HTMLInputElement>();
+    const dateRef = createRef<HTMLInputElement>();
+    const selectRef = createRef<HTMLInputElement>();
+    const checkboxRef = createRef<HTMLInputElement>();
+    const checkboxRef2 = createRef<HTMLInputElement>();
+    const checkboxRef3 = createRef<HTMLInputElement>();
+    const radioRef = createRef<HTMLInputElement>();
+    const fileRef = createRef<HTMLInputElement>();
 
-    const handleSubmit = (e: { preventDefault: () => void }) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        const nameInput = inputRef.current?.value.trim();
+        const dateInput = dateRef.current?.value;
+        const dropdownSelect = selectRef.current?.value;
+        const checkbox = checkboxRef.current?.checked;
+        const checkbox2 = checkboxRef2.current?.checked;
+        const checkbox3 = checkboxRef3.current?.checked;
+        const radioSwither = radioRef.current?.value;
+        const uploadedFile = fileRef.current?.files?.[0] ?? null;
+
+        const errors = {};
+
+        if (!nameInput) {
+            errors['name'] = 'Please enter a name.';
+        } else if (nameInput.length < 2) {
+            errors['name'] = 'Name must be at least 2 characters long.';
+        }
+
+        if (!dropdownSelect) {
+            errors['dropdown'] = "Please select date";
+        }
+
+        if (!checkbox || !checkbox2 || !checkbox3) {
+            errors['checkbox'] = "Please select checkbox";
+        }
+
+        if (!radioSwither) {
+            errors['radio'] = "Please select radio";
+        }
+
+        if (!uploadedFile) {
+            errors['file'] = "Please upload file";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setFormErrors(errors);
+            alert("Error occure - Please enter valid data");
+            console.log(setFormErrors(errors));
+            return;
+        }
+
         const newFormData = {
-            textInput: inputRef.current.value,
-            dateInput: dateRef.current.value,
-            dropdownSelect: selectRef.current.value,
-            checkbox: checkboxRef.current.checked,
-            radioSwitcher: radioRef.current.checked,
-            uploadedFile: fileRef.current.files[0],
+            textInput: inputRef.current?.value,
+            dateInput: dateRef.current?.value,
+            dropdownSelect: selectRef.current?.value,
+            checkbox: checkboxRef.current?.checked,
+            checkbox2: checkboxRef2.current?.checked,
+            checkbox3: checkboxRef3.current?.checked,
+            radioSwitcher: radioRef.current?.value,
+            uploadedFile: fileRef.current?.files?.[0] ?? null,
         };
 
         setCards((cards) => [...cards, newFormData]);
-        setFormData({});
+        setFormData({
+            textInput: '',
+            dateInput: '',
+            dropdownSelect: '',
+            checkbox: false,
+            checkbox2: false,
+            checkbox3: false,
+            radioSwitcher: '',
+            uploadedFile: null,
+        });
+
+        // Reset input fields to default values
         inputRef.current.value = '';
         dateRef.current.value = '';
         selectRef.current.value = '';
         checkboxRef.current.checked = false;
+        checkboxRef2.current.checked = false;
+        checkboxRef3.current.checked = false;
         radioRef.current.checked = false;
         fileRef.current.value = null;
     };
 
-    const renderCard = (card: React.ReactElement, index: React.ReactElement) => {
+    const renderCard = (card, index) => {
         return (
             <div className="card" key={index}>
                 <h2>{card.textInput}</h2>
@@ -41,6 +98,8 @@ function Form() {
                 <p>Date: {card.dateInput}</p>
                 <p>Dropdown/Select: {card.dropdownSelect}</p>
                 <p>Checkbox: {card.checkbox ? 'Checked' : 'Not Checked'}</p>
+                <p>Checkbox 2: {card.checkbox2 ? 'Checked' : 'Not Checked'}</p>
+                <p>Checkbox 3: {card.checkbox3 ? 'Checked' : 'Not Checked'}</p>
                 <p>Switcher/Radio: {card.radioSwitcher ? 'On' : 'Off'}</p>
             </div>
         );
@@ -68,15 +127,15 @@ function Form() {
                             <option value="option1">New York</option>
                             <option value="option2">Hanoi</option>
                             <option value="option3">Malaga</option>
-                            <option value="option3">Barcelona</option>
+                            <option value="option4">Barcelona</option>
                         </select>
                     </label>
                     <br />
                     <label>
                         Checkbox:
                         <input type="checkbox" ref={checkboxRef} />
-                        <input type="checkbox" ref={checkboxRef} />
-                        <input type="checkbox" ref={checkboxRef} />
+                        <input type="checkbox" ref={checkboxRef2} />
+                        <input type="checkbox" ref={checkboxRef3} />
                     </label>
                     <br />
                     <label>

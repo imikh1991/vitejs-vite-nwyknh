@@ -11,8 +11,8 @@
     filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.w50 {
-    width: 50%;
+.w20 {
+    width: 20%;
 }
 
 @keyframes logo-spin {
