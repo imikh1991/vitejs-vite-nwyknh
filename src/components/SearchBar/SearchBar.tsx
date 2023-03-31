@@ -1,51 +1,80 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import './SearchBar.css';
+import SearchLogo from './SearchLogo';
 
-class SearchBar extends React.Component {
-    state = { value: '' };
-    constructor(props: string) {
-        super(props);
-        this.state = { value: localStorage.getItem('searchStr') || '' };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+function SearchBar() {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
 
-    handleChange(event: ChangeEvent<HTMLInputElement>): void {
-        this.setState({ value: event.target.value });
-    }
+    const [searchStr, setSearchStr] = useState('');
 
-    handleSubmit(event: FormEvent) {
-        console.log('Was submitted: ' + this.state.value);
+    useEffect(() => {
+        const storedValue = localStorage.getItem('searchStr');
+        if (storedValue) {
+            setSearchStr(storedValue);
+        }
+    }, []);
+
+    const onSubmit = (data, event) => {
+        try {
+            console.log(data);
+            setSearchStr(data.searchStr);
+            localStorage.setItem('searchStr', data.searchStr);
+            alert('Form successfully submitted');
+            reset();
+            event.preventDefault();
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const handleChange = (event) => {
+        setSearchStr(event.target.value);
+    };
+
+    const handleFormSubmit = (event) => {
+        console.log('Was submitted: ' + searchStr);
         event.preventDefault();
-    }
+    };
 
-    componentWillUnmount(): void {
-        const str = this.state.value;
-        localStorage.setItem('searchStr', str);
-    }
+    useEffect(() => {
+        return () => {
+            localStorage.setItem('searchStr', searchStr);
+        };
+    }, [searchStr]);
 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit} className="relative flex w-full max-w-[24rem]">
+    return (
+        <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
+            <div className="search-container__search-bar">
+                <label htmlFor="searchStr">Search:</label>
                 <input
                     type="text"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    className="block h-7 w-full rounded-md rounded-tr-none rounded-br-none border-0 py-1.5 pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-200 sm:text-sm sm:leading-6"
+                    id="searchStr"
+                    className="searchTerm"
+                    {...register('searchStr', { required: true })}
+                    value={searchStr}
+                    onChange={handleChange}
                 />
+                {errors.searchStr && <span>This field is required</span>}
+
                 <button
                     type="submit"
                     name="search"
-                    disabled={!this.state.value}
-                    className="w-15 flex h-10 items-center rounded-l-none"
+                    className="searchButton"
+                    disabled={!searchStr}
+                    onClick={handleFormSubmit}
                 >
-                    {' '}
-                    Send
-                    <i className="fas fa-magnifying-glass" />
+                    <SearchLogo />
                 </button>
-            </form>
-        );
-    }
+                <span>{searchStr}</span>
+            </div>
+        </form>
+    );
 }
 
 export default SearchBar;

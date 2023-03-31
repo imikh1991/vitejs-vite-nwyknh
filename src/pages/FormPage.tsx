@@ -1,4 +1,3 @@
-import Header from '../components/Header/Header';
 import Form from '../components/Form/Form';
 import '../main.css';
 import '../pages/Home.css';
@@ -8,8 +7,7 @@ import '../components/Form/Form.css';
 
 function FormPage() {
     return (
-        <div className="FormPage">
-            <Header />
+        <div className="form-page">
             <Form />
         </div>
     );

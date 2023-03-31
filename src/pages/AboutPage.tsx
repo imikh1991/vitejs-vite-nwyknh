@@ -1,16 +1,14 @@
-import Header from '../components/Header/Header';
+import React from 'react';
+import './AboutPage.css';
 
 function AboutPage() {
     return (
-        <div>
-            <div>
-                <Header />
-                <ul>
-                    <li>
-                        <h1>This is About page</h1>
-                    </li>
-                </ul>
-            </div>
+        <div className="page-wrapper">
+            <ul>
+                <li>
+                    <h1>This is About page</h1>
+                </li>
+            </ul>
         </div>
     );
 }

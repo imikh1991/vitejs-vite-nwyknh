@@ -1,160 +1,114 @@
-import React, { useState, createRef } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import './Form.css';
+
+// set up interface object
+interface FormData {
+    name: string;
+    picture: string;
+    dateOfBirth: string;
+    gender: string;
+    agreeToTerms: boolean;
+    favoriteColor: string;
+}
 
 function Form() {
-    const [formData, setFormData] = useState({});
-    const [cards, setCards] = useState([]);
-    const [formErrors, setFormErrors] = useState({});
-    const inputRef = createRef<HTMLInputElement>();
-    const dateRef = createRef<HTMLInputElement>();
-    const selectRef = createRef<HTMLInputElement>();
-    const checkboxRef = createRef<HTMLInputElement>();
-    const checkboxRef2 = createRef<HTMLInputElement>();
-    const checkboxRef3 = createRef<HTMLInputElement>();
-    const radioRef = createRef<HTMLInputElement>();
-    const fileRef = createRef<HTMLInputElement>();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const [data, setData] = React.useState<FormData[]>([]);
 
-        const nameInput = inputRef.current?.value.trim();
-        const dateInput = dateRef.current?.value;
-        const dropdownSelect = selectRef.current?.value;
-        const checkbox = checkboxRef.current?.checked;
-        const checkbox2 = checkboxRef2.current?.checked;
-        const checkbox3 = checkboxRef3.current?.checked;
-        const radioSwither = radioRef.current?.value;
-        const uploadedFile = fileRef.current?.files?.[0] ?? null;
+    const onSubmit = (data, event) => {
+        try {
+            console.log(typeof data);
+            if (data.picture) {
+                console.log(data.picture);
+            }
 
-        const errors = {};
-
-        if (!nameInput) {
-            errors['name'] = 'Please enter a name.';
-        } else if (nameInput.length < 2) {
-            errors['name'] = 'Name must be at least 2 characters long.';
+            setData((prevData) => [...prevData, data]);
+            alert('Form successfully submitted');
+            reset();
+            event.preventDefault();
+        } catch (e) {
+            console.error(e);
         }
-
-        if (!dropdownSelect) {
-            errors['dropdown'] = "Please select date";
-        }
-
-        if (!checkbox || !checkbox2 || !checkbox3) {
-            errors['checkbox'] = "Please select checkbox";
-        }
-
-        if (!radioSwither) {
-            errors['radio'] = "Please select radio";
-        }
-
-        if (!uploadedFile) {
-            errors['file'] = "Please upload file";
-        }
-
-        if (Object.keys(errors).length > 0) {
-            setFormErrors(errors);
-            alert("Error occure - Please enter valid data");
-            console.log(setFormErrors(errors));
-            return;
-        }
-
-        const newFormData = {
-            textInput: inputRef.current?.value,
-            dateInput: dateRef.current?.value,
-            dropdownSelect: selectRef.current?.value,
-            checkbox: checkboxRef.current?.checked,
-            checkbox2: checkboxRef2.current?.checked,
-            checkbox3: checkboxRef3.current?.checked,
-            radioSwitcher: radioRef.current?.value,
-            uploadedFile: fileRef.current?.files?.[0] ?? null,
-        };
-
-        setCards((cards) => [...cards, newFormData]);
-        setFormData({
-            textInput: '',
-            dateInput: '',
-            dropdownSelect: '',
-            checkbox: false,
-            checkbox2: false,
-            checkbox3: false,
-            radioSwitcher: '',
-            uploadedFile: null,
-        });
-
-        // Reset input fields to default values
-        inputRef.current.value = '';
-        dateRef.current.value = '';
-        selectRef.current.value = '';
-        checkboxRef.current.checked = false;
-        checkboxRef2.current.checked = false;
-        checkboxRef3.current.checked = false;
-        radioRef.current.checked = false;
-        fileRef.current.value = null;
     };
-
-    const renderCard = (card, index) => {
+    const renderCard = ({ name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }, index: number) => {
         return (
             <div className="card" key={index}>
-                <h2>{card.textInput}</h2>
-                <img src={URL.createObjectURL(card.uploadedFile)} alt="" />
-                <p>Date: {card.dateInput}</p>
-                <p>Dropdown/Select: {card.dropdownSelect}</p>
-                <p>Checkbox: {card.checkbox ? 'Checked' : 'Not Checked'}</p>
-                <p>Checkbox 2: {card.checkbox2 ? 'Checked' : 'Not Checked'}</p>
-                <p>Checkbox 3: {card.checkbox3 ? 'Checked' : 'Not Checked'}</p>
-                <p>Switcher/Radio: {card.radioSwitcher ? 'On' : 'Off'}</p>
+                <h2>{name}</h2>
+                <img src={URL.createObjectURL(picture[0])} alt="" />
+                <p> Date: {dateOfBirth}</p>
+                <h2>Gender: {gender === 'male' ? '👦' : '👧'}</h2>
+                <p>Checkbox: {agreeToTerms}</p>
+                <p>Color: {favoriteColor}</p>
+                <a href="#">Go somewhere</a>
             </div>
         );
     };
 
     return (
-        <section className="form-container">
-            <h2>Form</h2>
-            <div className="form">
-                <form className="register-form" onSubmit={handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" ref={inputRef} />
-                    </label>
-                    <br />
-                    {formErrors.name && <div className="error">{formErrors.textInput}</div>}
-                    <label>
-                        Date Input:
-                        <input type="date" ref={dateRef} />
-                    </label>
-                    <br />
-                    <label>
-                        Select your city:
-                        <select ref={selectRef}>
-                            <option value="option1">New York</option>
-                            <option value="option2">Hanoi</option>
-                            <option value="option3">Malaga</option>
-                            <option value="option4">Barcelona</option>
-                        </select>
-                    </label>
-                    <br />
-                    <label>
-                        Checkbox:
-                        <input type="checkbox" ref={checkboxRef} />
-                        <input type="checkbox" ref={checkboxRef2} />
-                        <input type="checkbox" ref={checkboxRef3} />
-                    </label>
-                    <br />
-                    <label>
-                        Switcher/Radio:
-                        <input type="radio" ref={radioRef} />
-                    </label>
-                    <br />
-                    <label>
-                        File Upload (Image):
-                        <input type="file" ref={fileRef} accept="image/*" />
-                    </label>
-                    <br />
-                    <button type="submit">Submit</button>
-                </form>
+        <section onSubmit={handleSubmit(onSubmit)}>
+            <form className="form-container">
+                <h2>Form</h2>
 
-                <p>Confirmation message goes here.</p>
+                <div>
+                    <label htmlFor="name">Name:</label>
+                    <input type="text" id="name" {...register('name', { required: true })} />
+                    {errors.name && <span>This field is required</span>}
+                </div>
 
-                <div className="card-grid-container">{cards.map(renderCard)}</div>
-            </div>
+                <div>
+                    <label htmlFor="dateOfBirth">Date of Birth:</label>
+                    <input type="date" id="dateOfBirth" {...register('dateOfBirth', { required: true })} />
+                    {errors.dateOfBirth && <span>This field is required</span>}
+                </div>
+
+                <div>
+                    <label htmlFor="gender">Gender:</label>
+                    <select id="gender" {...register('gender', { required: true })}>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    {errors.gender && <span>This field is required</span>}
+                </div>
+
+                <div>
+                    <label htmlFor="agreeToTerms">
+                        <input type="checkbox" id="agreeToTerms" {...register('agreeToTerms', { required: true })} />
+                        Agree to terms and conditions
+                    </label>
+                    {errors.agreeToTerms && <span>Please agree to the terms and conditions</span>}
+                </div>
+
+                <div>
+                    <label>Favorite color:</label>
+                    <input type="radio" id="red" value="red" {...register('favoriteColor', { required: true })} />
+                    <label htmlFor="red">Red</label>
+                    <input type="radio" id="green" value="green" {...register('favoriteColor', { required: true })} />
+                    <label htmlFor="green">Green</label>
+                    <input type="radio" id="blue" value="blue" {...register('favoriteColor', { required: true })} />
+                    <label htmlFor="blue">Blue</label>
+                    {errors.favoriteColor && <span>Please select your favorite color</span>}
+                </div>
+
+                <div>
+                    <label aria-labelledby="file Upload" htmlFor="file-upload" id="file-upload-label">
+                        File Upload:
+                    </label>
+                    <input {...register('picture', { required: true })} type="file" id="file-upload" alt="" />
+                    {errors.fileUpload && <span>This field is required</span>}
+                </div>
+                <button disabled={!data} type="submit">
+                    Submit
+                </button>
+            </form>
+            <div className="card-grid-container">{data.map((item, index) => renderCard(item, index))}</div>
         </section>
     );
 }
