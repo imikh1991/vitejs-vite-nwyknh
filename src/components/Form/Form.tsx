@@ -1,11 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
+import img from './tw-icon.png';
 
 // set up interface object
 interface FormData {
     name: string;
-    picture: string;
+    picture: FileList;
     dateOfBirth: string;
     gender: string;
     agreeToTerms: boolean;
@@ -16,10 +17,9 @@ function Form() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
         reset,
+        formState: { errors, isSubmitSuccessful },
     } = useForm();
-
     const [data, setData] = React.useState<FormData[]>([]);
 
     const onSubmit = (data, event) => {
@@ -28,20 +28,21 @@ function Form() {
             if (data.picture) {
                 console.log(data.picture);
             }
-
             setData((prevData) => [...prevData, data]);
             alert('Form successfully submitted');
-            reset();
             event.preventDefault();
         } catch (e) {
             console.error(e);
         }
     };
+
     const renderCard = ({ name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }, index: number) => {
+        // img стоит как заглушка
+        const imageUrl = picture.length > 0 ? URL.createObjectURL(picture[0] as Blob) : img;
         return (
             <div className="card" key={index}>
                 <h2>{name}</h2>
-                <img src={URL.createObjectURL(picture[0])} alt="" />
+                <img src={imageUrl} alt="" />
                 <p> Date: {dateOfBirth}</p>
                 <h2>Gender: {gender === 'male' ? '👦' : '👧'}</h2>
                 <p>Checkbox: {agreeToTerms}</p>
@@ -50,6 +51,13 @@ function Form() {
             </div>
         );
     };
+
+    React.useEffect(() => {
+        if (isSubmitSuccessful) {
+            console.log('SubmitSuccessful');
+            reset();
+        }
+    }, [isSubmitSuccessful, reset]);
 
     return (
         <section onSubmit={handleSubmit(onSubmit)}>

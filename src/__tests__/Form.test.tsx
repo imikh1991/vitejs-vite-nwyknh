@@ -9,7 +9,6 @@ describe('Form', () => {
     it('renders a form with required fields', () => {
         render(<Form />);
 
-        // Check for required form elements
         expect(screen.getByLabelText('Name:')).toBeDefined();
         expect(screen.getByLabelText('Date of Birth:')).toBeDefined();
         expect(screen.getByLabelText('Gender:')).toBeDefined();
