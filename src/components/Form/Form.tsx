@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
-import img from './tw-icon.png';
 
 // set up interface object
 interface FormData {
@@ -14,12 +13,20 @@ interface FormData {
 }
 
 function Form() {
+    const defaultValues = {
+        name: '',
+        picture: '',
+        dateOfBirth: '',
+        gender: '',
+        agreeToTerms: false,
+        favoriteColor: '',
+    };
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors, isSubmitSuccessful },
-    } = useForm();
+    } = useForm({ defaultValues });
     const [data, setData] = React.useState<FormData[]>([]);
 
     const onSubmit = (data, event) => {
@@ -28,7 +35,7 @@ function Form() {
             if (data.picture) {
                 console.log(data.picture);
             }
-            setData((prevData) => [...prevData, data]);
+            setData((prevData) => [...prevData, structuredClone(data)]);
             alert('Form successfully submitted');
             event.preventDefault();
         } catch (e) {
@@ -37,12 +44,11 @@ function Form() {
     };
 
     const renderCard = ({ name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }, index: number) => {
-        // img стоит как заглушка
-        const imageUrl = picture.length > 0 ? URL.createObjectURL(picture[0] as Blob) : img;
+        const imageUrl = picture.length > 0 ? URL.createObjectURL(picture[0] as Blob) : '';
         return (
             <div className="card" key={index}>
                 <h2>{name}</h2>
-                <img src={imageUrl} alt="" />
+                {imageUrl && <img src={imageUrl} alt="" />}
                 <p> Date: {dateOfBirth}</p>
                 <h2>Gender: {gender === 'male' ? '👦' : '👧'}</h2>
                 <p>Checkbox: {agreeToTerms}</p>
@@ -51,13 +57,14 @@ function Form() {
             </div>
         );
     };
+    const setOfCards = data.map((item, index) => renderCard(item, index));
 
     React.useEffect(() => {
         if (isSubmitSuccessful) {
             console.log('SubmitSuccessful');
-            reset();
+            reset(defaultValues);
         }
-    }, [isSubmitSuccessful, reset]);
+    });
 
     return (
         <section onSubmit={handleSubmit(onSubmit)}>
@@ -110,13 +117,13 @@ function Form() {
                         File Upload:
                     </label>
                     <input {...register('picture', { required: true })} type="file" id="file-upload" alt="" />
-                    {errors.fileUpload && <span>This field is required</span>}
+                    {errors.picture && <span>This field is required</span>}
                 </div>
                 <button disabled={!data} type="submit">
                     Submit
                 </button>
             </form>
-            <div className="card-grid-container">{data.map((item, index) => renderCard(item, index))}</div>
+            <div className="card-grid-container">{setOfCards}</div>
         </section>
     );
 }
