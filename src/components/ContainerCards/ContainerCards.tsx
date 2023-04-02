@@ -15,7 +15,7 @@ function ContainerCards() {
         {
             image: 'https://rickandmortyapi.com/api/character/avatar/508.jpeg',
             title: 'Card Title 2',
-            text: 'Some quick example text to build title and make up content',
+            text: 'Some quick on the card title and make up content.',
         },
         {
             image: 'https://rickandmortyapi.com/api/character/avatar/789.jpeg',

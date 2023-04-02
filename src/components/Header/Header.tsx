@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import ReactLogo from './ReactLogo';
+import { NavLink } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -12,13 +12,13 @@ function Header() {
                             <ReactLogo />
                         </li>
                         <li className="nav-tab">
-                            <Link to="/">Home</Link>
+                            <NavLink to="/">Home</NavLink>
                         </li>
                         <li className="nav-tab">
-                            <Link to="about">About</Link>
+                            <NavLink to="/about">About </NavLink>
                         </li>
                         <li className="nav-tab">
-                            <Link to="form">Form</Link>
+                            <NavLink to="/form">Form</NavLink>
                         </li>
                     </ul>
                 </nav>

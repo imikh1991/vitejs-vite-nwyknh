@@ -10,6 +10,7 @@ import NotFound from '../pages/NotFound';
 describe('App', () => {
     it('renders App component', () => {
         render(<App />, { wrapper: BrowserRouter });
+        expect(screen.getByText(/Home/i)).toBeDefined();
     });
 
     it('renders Not Found page component', () => {
