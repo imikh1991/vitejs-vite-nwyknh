@@ -22,6 +22,7 @@
         "eslint-import-resolver-typescript": "^3.5.3",
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-react-hooks": "^4.6.0",
+        "fetch": "^1.1.0",
         "react": "^18.2.0",
         "react-bootstrap": "^2.7.2",
         "react-dom": "^18.2.0",

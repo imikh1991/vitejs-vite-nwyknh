@@ -1,7 +1,9 @@
+import img from '../assets/notFound.png';
 function NotFound() {
     return (
         <div>
-            <h1>This is Not Found 404</h1>
+            <h1>This is Not Found This Universe it does not exist. Wubba Lubba Dub Dub!</h1>
+            <img src={img} alt="" />
         </div>
     );
 }
