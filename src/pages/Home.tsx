@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import SearchBar from '../components/SearchBar/SearchBar';
+import RequestAPI from '../components/SearchBar/RequestAPI';
+
 import { characters } from '../data/Characters';
 import '../main.css';
 import '../pages/Home.css';
@@ -14,6 +16,7 @@ function Home() {
     return (
         <div className="Home">
             <SearchBar />
+            <RequestAPI />
             <ContainerCards characters={charactersDefault} />
         </div>
     );
