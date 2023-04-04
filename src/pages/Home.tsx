@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import SearchBar from '../components/SearchBar/SearchBar';
-import RequestAPI from '../components/SearchBar/RequestAPI';
 
-import { characters } from '../data/Characters';
 import '../main.css';
 import '../pages/Home.css';
 import '../components/Header/Header.css';
 import '../components/SearchBar/SearchBar.css';
 import '../components/Form/Form.css';
 
-function Home() {
-    const [charactersDefault] = useState(characters);
+import GetCharactersByNumber from '../requests/GetCharactersByNumber';
+import { ICharacter, CharacterDataDisplayProps } from '../models/types';
+
+function Home(props: CharacterDataDisplayProps) {
+    const [characterData, setCharacterData] = useState<ICharacter[]>([]);
+    useEffect(() => {
+        GetCharactersByNumber([props.searchStr])
+            .then((data) => {
+                setCharacterData(data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    });
 
     return (
         <div className="Home">
             <SearchBar />
-            <RequestAPI />
-            <ContainerCards characters={charactersDefault} />
+            <ContainerCards characters={props.searchStr} />
         </div>
     );
 }

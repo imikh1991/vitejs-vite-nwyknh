@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680595581298" clover="3.2.0">
-  <project timestamp="1680595581298" name="All files">
-    <metrics statements="643" coveredstatements="588" conditionals="25" coveredconditionals="18" methods="18" coveredmethods="12" elements="686" coveredelements="618" complexity="0" loc="643" ncloc="643" packages="8" files="13" classes="13"/>
+<coverage generated="1680601781326" clover="3.2.0">
+  <project timestamp="1680601781326" name="All files">
+    <metrics statements="699" coveredstatements="627" conditionals="27" coveredconditionals="20" methods="20" coveredmethods="13" elements="746" coveredelements="660" complexity="0" loc="699" ncloc="699" packages="8" files="14" classes="14"/>
     <package name="src">
       <metrics statements="27" coveredstatements="27" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="App.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/App.tsx">
@@ -36,9 +36,9 @@
       </file>
     </package>
     <package name="src.components.Card">
-      <metrics statements="18" coveredstatements="18" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <metrics statements="25" coveredstatements="25" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="Card.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/components/Card/Card.tsx">
-        <metrics statements="18" coveredstatements="18" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="25" coveredstatements="25" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -55,8 +55,15 @@
         <line num="14" count="4" type="stmt"/>
         <line num="15" count="4" type="stmt"/>
         <line num="16" count="4" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components.ContainerCards">
@@ -282,7 +289,56 @@
       </file>
     </package>
     <package name="src.components.SearchBar">
-      <metrics statements="101" coveredstatements="81" conditionals="6" coveredconditionals="4" methods="5" coveredmethods="2"/>
+      <metrics statements="147" coveredstatements="110" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="3"/>
+      <file name="RequestAPI.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/components/SearchBar/RequestAPI.tsx">
+        <metrics statements="46" coveredstatements="29" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+      </file>
       <file name="SearchBar.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/components/SearchBar/SearchBar.tsx">
         <metrics statements="80" coveredstatements="60" conditionals="5" coveredconditionals="3" methods="4" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -629,7 +685,7 @@
       </file>
     </package>
     <package name="src.pages">
-      <metrics statements="65" coveredstatements="58" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
+      <metrics statements="68" coveredstatements="61" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
       <file name="AboutPage.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/pages/AboutPage.tsx">
         <metrics statements="16" coveredstatements="16" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -669,7 +725,7 @@
         <line num="16" count="1" type="stmt"/>
       </file>
       <file name="Home.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/pages/Home.tsx">
-        <metrics statements="22" coveredstatements="22" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="25" coveredstatements="25" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -680,9 +736,9 @@
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
@@ -692,6 +748,9 @@
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
       </file>
       <file name="NotFound.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/pages/NotFound.tsx">
         <metrics statements="11" coveredstatements="11" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>

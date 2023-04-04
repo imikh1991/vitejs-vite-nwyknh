@@ -4,6 +4,10 @@ export interface SearchBarProps {
     handleSearchClick?: () => void;
 }
 
+export interface CharacterDataDisplayProps {
+    searchStr: any;
+}
+
 export interface ICharacter {
     id: number | string;
     name: string;

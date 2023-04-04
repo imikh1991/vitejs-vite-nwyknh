@@ -1,10 +1,12 @@
 import Card from '../Card/Card';
-import { ICardsProps } from '../../models/types';
+import { ICardsProps, ICharacter } from '../../models/types';
 
 function ContainerCards(props: ICardsProps) {
+    const characters = Array.isArray(props.characters) ? props.characters : [];
+
     return (
         <div className="card-grid-container">
-            {props.characters.map((character) => {
+            {characters.map((character: ICharacter) => {
                 return <Card character={character} key={String(character.id)} />;
             })}
         </div>

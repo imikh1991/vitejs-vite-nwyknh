@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchBar.css';
 import SearchLogo from './SearchLogo';
+import { ICharacter, CharacterDataDisplayProps } from '../../models/types';
+import GetCharactersByName from '../../requests/GetCharactersByName';
 
 function SearchBar() {
+    const [characterData, setCharacterData] = useState<ICharacter[]>([]);
+
     const {
         register,
         handleSubmit,
@@ -37,7 +41,13 @@ function SearchBar() {
         setSearchStr(event.target.value);
     };
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
+        try {
+            const test = await GetCharactersByName(searchStr);
+            setCharacterData(test.results);
+        } catch (error: any) {
+            console.log(error.message);
+        }
         console.log('Was submitted: ' + searchStr);
         event.preventDefault();
     };
@@ -47,6 +57,16 @@ function SearchBar() {
             localStorage.setItem('searchStr', searchStr);
         };
     }, [searchStr]);
+
+    function CharacterDataDisplay(props: CharacterDataDisplayProps) {
+        const { searchStr } = props;
+
+        return (
+            <>
+                <span>Search Results for {searchStr}</span>
+            </>
+        );
+    }
 
     return (
         <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
@@ -71,7 +91,7 @@ function SearchBar() {
                 >
                     <SearchLogo />
                 </button>
-                <span>{searchStr}</span>
+                <CharacterDataDisplay searchStr={searchStr} />
             </div>
         </form>
     );
