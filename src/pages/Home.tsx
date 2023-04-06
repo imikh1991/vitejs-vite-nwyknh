@@ -8,15 +8,20 @@ import '../components/Header/Header.css';
 import '../components/SearchBar/SearchBar.css';
 import '../components/Form/Form.css';
 
-import GetCharactersByNumber from '../requests/GetCharactersByNumber';
-import { ICharacter, CharacterDataDisplayProps } from '../models/types';
+import GetCharactersByName from '../requests/GetCharactersByName';
 
-function Home(props: CharacterDataDisplayProps) {
+import { ICharacter, IsearchStr } from '../models/types';
+
+function Home() {
     const [characterData, setCharacterData] = useState<ICharacter[]>([]);
+
     useEffect(() => {
-        GetCharactersByNumber([props.searchStr])
+        GetCharactersByName(' ')
             .then((data) => {
                 setCharacterData(data);
+                // вот здесь должны быть данные по поиску из компонента SearchBar
+                // чтобы ContainerCards показал их на экран
+                console.log('characterData>>>', { characterData });
             })
             .catch((err) => {
                 console.log(err.message);
@@ -26,7 +31,7 @@ function Home(props: CharacterDataDisplayProps) {
     return (
         <div className="Home">
             <SearchBar />
-            <ContainerCards characters={props.searchStr} />
+            <ContainerCards characters={characterData} />
         </div>
     );
 }

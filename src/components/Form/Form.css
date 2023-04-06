@@ -45,11 +45,6 @@ span {
     background-color: #242424;
 }
 
-.card-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-gap: 20px;
-}
 
 .card {
     display: flex;

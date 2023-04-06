@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchBar.css';
 import SearchLogo from './SearchLogo';
-import { ICharacter, CharacterDataDisplayProps } from '../../models/types';
+import { ICharacter } from '../../models/types';
 import GetCharactersByName from '../../requests/GetCharactersByName';
 
 function SearchBar() {
@@ -45,10 +45,15 @@ function SearchBar() {
         try {
             const test = await GetCharactersByName(searchStr);
             setCharacterData(test.results);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.log(error.message);
         }
         console.log('Was submitted: ' + searchStr);
+        // вернули текущее состояние
+        // characterData - набор карточек - как его прокинуть на рендер?
+        // поиск должен работать как фильтр
+        console.log(characterData);
         event.preventDefault();
     };
 
@@ -57,16 +62,6 @@ function SearchBar() {
             localStorage.setItem('searchStr', searchStr);
         };
     }, [searchStr]);
-
-    function CharacterDataDisplay(props: CharacterDataDisplayProps) {
-        const { searchStr } = props;
-
-        return (
-            <>
-                <span>Search Results for {searchStr}</span>
-            </>
-        );
-    }
 
     return (
         <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +86,7 @@ function SearchBar() {
                 >
                     <SearchLogo />
                 </button>
-                <CharacterDataDisplay searchStr={searchStr} />
+                <span>{searchStr}</span>
             </div>
         </form>
     );

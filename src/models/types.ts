@@ -4,8 +4,8 @@ export interface SearchBarProps {
     handleSearchClick?: () => void;
 }
 
-export interface CharacterDataDisplayProps {
-    searchStr: any;
+export interface IsearchStr {
+    searchStr: string;
 }
 
 export interface ICharacter {

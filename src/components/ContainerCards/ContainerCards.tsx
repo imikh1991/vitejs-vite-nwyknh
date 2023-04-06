@@ -1,5 +1,6 @@
 import Card from '../Card/Card';
 import { ICardsProps, ICharacter } from '../../models/types';
+import './ContainerCards.css';
 
 function ContainerCards(props: ICardsProps) {
     const characters = Array.isArray(props.characters) ? props.characters : [];
