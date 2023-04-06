@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import SearchBar from '../components/SearchBar/SearchBar';
 
@@ -8,29 +8,19 @@ import '../components/Header/Header.css';
 import '../components/SearchBar/SearchBar.css';
 import '../components/Form/Form.css';
 
-import GetCharactersByName from '../requests/GetCharactersByName';
-
-import { ICharacter, IsearchStr } from '../models/types';
+import { ICharacter } from '../models/types';
 
 function Home() {
+    // через родителя прокидываем данные от детей и должно прокинуться по идее!
     const [characterData, setCharacterData] = useState<ICharacter[]>([]);
-
-    useEffect(() => {
-        GetCharactersByName(' ')
-            .then((data) => {
-                setCharacterData(data);
-                // вот здесь должны быть данные по поиску из компонента SearchBar
-                // чтобы ContainerCards показал их на экран
-                console.log('characterData>>>', { characterData });
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
-    });
-
+    const handleFormSubmit = (characterData) => {
+        setCharacterData(characterData);
+        console.log('Привет их Home на рендер уходит>>>');
+        console.log(characterData);
+    };
     return (
         <div className="Home">
-            <SearchBar />
+            <SearchBar onClick={handleFormSubmit} />
             <ContainerCards characters={characterData} />
         </div>
     );
