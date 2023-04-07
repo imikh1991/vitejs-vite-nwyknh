@@ -1,4 +1,6 @@
 import img from '../assets/notFound.png';
+import '../components/Modal/Modal.css';
+
 function NotFound() {
     return (
         <div>

@@ -1,6 +1,8 @@
 const GetCharactersByName = async (name: string) => {
-    const response = await fetch(`https://rickandmortyapi.com/api/character?name=${name}`);
-
+    let response = await fetch(`https://rickandmortyapi.com/api/character?name=${name}`);
+    if (!name) {
+        response = await fetch(`https://rickandmortyapi.com/api/character`);
+    }
     return response.json();
 };
 
