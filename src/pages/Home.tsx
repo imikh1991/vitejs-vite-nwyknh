@@ -46,8 +46,6 @@ function Home() {
         return <ProgressBar />;
     } else if (loading) {
         return <ProgressBar />;
-    } else if (error) {
-        return 'Error!';
     }
 
     const childToParent = (childdata) => {
