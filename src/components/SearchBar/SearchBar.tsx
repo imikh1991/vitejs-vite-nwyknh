@@ -3,17 +3,17 @@ import { useForm } from 'react-hook-form';
 import './SearchBar.css';
 import SearchLogo from './SearchLogo';
 import { ICharacter } from '../../models/types';
-import GetCharactersByName from '../../requests/GetCharactersByName';
-
 function SearchBar({ childToParent }) {
     const [characterData, setCharacterData] = useState<ICharacter[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const [searchStr, setSearchStr] = useState('');
+    const [searchStr, setSearchStr] = useState(' ');
 
     const onSubmit = (data, event) => {
         try {
@@ -24,6 +24,7 @@ function SearchBar({ childToParent }) {
             const storedValue = localStorage.getItem('searchStr');
             if (storedValue) {
                 setSearchStr(storedValue);
+                console.log('произошел onSubmit', storedValue);
             }
         } catch (e) {
             console.error(e);
@@ -32,19 +33,58 @@ function SearchBar({ childToParent }) {
 
     const handleChange = (event) => {
         setSearchStr(event.target.value);
+        try {
+            fetch(`https://rickandmortyapi.com/api/character?name=${searchStr}`)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw response;
+                })
+                .then((data) => {
+                    setCharacterData(data.results);
+                    childToParent(data.results);
+                    console.log('произошел data.results>>>', data.results);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setError(error);
+                    alert('Error fetching data');
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const handleFormSubmit = async (event) => {
+    const handleFormSubmit = (event) => {
         try {
-            const test = await GetCharactersByName(searchStr);
-            setCharacterData(test.results);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-            console.log(error.message);
+            fetch(`https://rickandmortyapi.com/api/character?name=${searchStr}`)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw response;
+                })
+                .then((data) => {
+                    setCharacterData(data.results);
+                    childToParent(data.results);
+                    console.log('произошел data.results>>>', data.results);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setError(error);
+                    alert('Error fetching data');
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        } catch (error) {
+            console.log(error);
         }
         console.log('Was submitted: ' + searchStr);
-        // onClick(characterData); отправим данные в родителя
-        childToParent(characterData);
         if (!characterData) {
             alert('Nothing to display');
         }

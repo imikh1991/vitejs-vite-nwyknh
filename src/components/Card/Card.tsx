@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ICardProps } from '../../models/types';
 import './Card.css';
+import Modal from '../Modal/Modal';
 
 const Card: React.FC<ICardProps> = ({ character }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleClick = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
-        <div className="card">
+        <div className="card" onClick={handleClick}>
             <img src={character.image} alt="Card Image 1" />
             <h2>{character.name}</h2>
             <h2>{character.status}</h2>
             <p>{character.species}</p>
             <p>{character.gender}</p>
-            <a href="https://rickandmortyapi.com/">Go somewhere</a>
+            <a href="https://rickandmortyapi.com/">Arhhh!</a>
+
+            {isOpen && <Modal setIsOpen={setIsOpen} character={character} />}
         </div>
     );
 };

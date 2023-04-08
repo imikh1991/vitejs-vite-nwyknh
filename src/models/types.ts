@@ -4,10 +4,6 @@ export interface SearchBarProps {
     handleSearchClick?: () => void;
 }
 
-export interface IsearchStr {
-    searchStr: string;
-}
-
 export interface ICharacter {
     id: number | string;
     name: string;
@@ -27,6 +23,11 @@ export interface ICharacter {
     episode: string[];
     url: string;
     created: string;
+}
+
+export interface IModalProps {
+    setIsOpen: (isOpen: boolean) => void;
+    character: ICharacter;
 }
 
 export interface ILikeRepository {

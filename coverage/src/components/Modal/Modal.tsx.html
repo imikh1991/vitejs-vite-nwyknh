@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.44% </span>
+                <span class="strong">28.12% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/36</span>
+                <span class='fraction'>9/32</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.44% </span>
+                <span class="strong">28.12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/36</span>
+                <span class='fraction'>9/32</span>
             </div>
         
             
@@ -95,21 +95,13 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -138,30 +130,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import './Modal.css?inline';
 import { RiCloseLine } from 'react-icons/ri';
+import Card from '../Card/Card';
+import { IModalProps } from '../../models/types';
 &nbsp;
-const Modal = <span class="fstat-no" title="function not covered" >({ setIsOpen }) =&gt; {</span>
+const Modal = <span class="fstat-no" title="function not covered" >({ setIsOpen, character }: IModalProps) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    console.log(character);</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className="modal-wrapper"&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className="darkBG" onClick={() =&gt; setIsOpen(false)} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className="centered"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;div className="modal"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;div className="modalHeader"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        &lt;h5 className="heading"&gt;Dialog&lt;/h5&gt;</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;h5 className="heading"&gt;Details Info&lt;/h5&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;button className="closeBtn" onClick={() =&gt; setIsOpen(false)}&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;RiCloseLine style={{ marginBottom: '-3px' }} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;div className="modalContent"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        Are you sure you want to delete the item?</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;Card character={character} key={String(character.id)} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;div className="modalActions"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                            &lt;div className="actionsContainer"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                                &lt;button className="deleteBtn" onClick={() =&gt; setIsOpen(false)}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                                    Delete</span>
-<span class="cstat-no" title="statement not covered" >                                &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >                                &lt;button className="cancelBtn" onClick={() =&gt; setIsOpen(false)}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                                    Cancel</span>
-<span class="cstat-no" title="statement not covered" >                                &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >                            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >                            &lt;div className="actionsContainer"&gt;&lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                        &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
@@ -178,7 +166,7 @@ export default Modal;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-07T15:13:42.075Z
+                at 2023-04-08T18:26:36.053Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

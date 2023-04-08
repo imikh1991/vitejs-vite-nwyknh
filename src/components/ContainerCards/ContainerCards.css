@@ -11,8 +11,7 @@
 .card-grid-container {
     width: 90%;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 50% 50%;
     justify-items: stretch;
     align-items: stretch;
     grid-gap: 20px;

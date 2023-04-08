@@ -3,7 +3,7 @@ import { ICardsProps, ICharacter } from '../../models/types';
 import './ContainerCards.css';
 
 function ContainerCards(props: ICardsProps) {
-    const characters = Array.isArray(props.characters) ? props.characters : [];
+    const characters = props.characters;
     console.log('Привет из контейнер карт characters>>>');
     console.log(characters);
     return (
