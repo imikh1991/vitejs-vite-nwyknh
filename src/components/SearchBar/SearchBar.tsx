@@ -2,13 +2,9 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchBar.css';
 import SearchLogo from './SearchLogo';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import { ICharacter } from '../../models/types';
 function SearchBar({ childToParent }) {
     const [characterData, setCharacterData] = useState<ICharacter[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [showProgress, setShowProgress] = useState(true);
     const {
         register,
         handleSubmit,
@@ -48,12 +44,9 @@ function SearchBar({ childToParent }) {
                 })
                 .catch((error) => {
                     console.error(error);
-                    setError(error);
                     alert('Error fetching data');
                 })
-                .finally(() => {
-                    setLoading(false);
-                });
+                .finally(() => {});
         } catch (error) {
             console.log(error);
         }
@@ -74,13 +67,9 @@ function SearchBar({ childToParent }) {
                 })
                 .catch((error) => {
                     console.error(error);
-                    setError(error);
                     alert('Error fetching data');
                 })
-                .finally(() => {
-                    setLoading(false);
-                });
-            setShowProgress(false);
+                .finally(() => {});
         } catch (error) {
             console.log(error);
         }
@@ -96,13 +85,6 @@ function SearchBar({ childToParent }) {
             localStorage.setItem('searchStr', searchStr);
         };
     }, [searchStr]);
-    if (showProgress) {
-        return <ProgressBar />;
-    } else if (loading) {
-        return <ProgressBar />;
-    } else {
-        console.log(error);
-    }
 
     return (
         <form className="search-container" data-testid="search" onSubmit={handleSubmit(onSubmit)}>
