@@ -1,13 +1,11 @@
-import React from 'react';
 import './Modal.css?inline';
 import { RiCloseLine } from 'react-icons/ri';
 import Card from '../Card/Card';
 import { IModalProps } from '../../models/types';
 
 const Modal = ({ setIsOpen, character }: IModalProps) => {
-    console.log(character);
     return (
-        <div className="modal-wrapper">
+        <div className="modal-wrapper" data-testid="modal">
             <div className="darkBG" onClick={() => setIsOpen(false)} />
             <div className="centered">
                 <div className="modal">

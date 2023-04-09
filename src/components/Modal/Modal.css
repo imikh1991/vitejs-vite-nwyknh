@@ -24,7 +24,7 @@
 
 .modal {
   width: 350px;
-  height: 370px;
+  height: auto;
   background: white;
   color: white;
   z-index: 10;
@@ -50,9 +50,7 @@
 }
 
 .modalContent {
-  padding: 10px;
-  width: 100%;
-  height: 100%;
+  padding: 30px;
   font-size: 14px;
   color: #2c3e50;
   text-align: center;

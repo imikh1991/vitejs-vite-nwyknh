@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchBar.css';
 import SearchLogo from './SearchLogo';
+import ProgressBar from '../ProgressBar/ProgressBar';
 import { ICharacter } from '../../models/types';
 function SearchBar({ childToParent }) {
     const [characterData, setCharacterData] = useState<ICharacter[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showProgress, setShowProgress] = useState(true);
     const {
         register,
         handleSubmit,
@@ -24,7 +26,6 @@ function SearchBar({ childToParent }) {
             const storedValue = localStorage.getItem('searchStr');
             if (storedValue) {
                 setSearchStr(storedValue);
-                console.log('произошел onSubmit', storedValue);
             }
         } catch (e) {
             console.error(e);
@@ -44,7 +45,6 @@ function SearchBar({ childToParent }) {
                 .then((data) => {
                     setCharacterData(data.results);
                     childToParent(data.results);
-                    console.log('произошел data.results>>>', data.results);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -71,7 +71,6 @@ function SearchBar({ childToParent }) {
                 .then((data) => {
                     setCharacterData(data.results);
                     childToParent(data.results);
-                    console.log('произошел data.results>>>', data.results);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -81,6 +80,7 @@ function SearchBar({ childToParent }) {
                 .finally(() => {
                     setLoading(false);
                 });
+            setShowProgress(false);
         } catch (error) {
             console.log(error);
         }
@@ -96,9 +96,16 @@ function SearchBar({ childToParent }) {
             localStorage.setItem('searchStr', searchStr);
         };
     }, [searchStr]);
+    if (showProgress) {
+        return <ProgressBar />;
+    } else if (loading) {
+        return <ProgressBar />;
+    } else {
+        console.log(error);
+    }
 
     return (
-        <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
+        <form className="search-container" data-testid="search" onSubmit={handleSubmit(onSubmit)}>
             <div className="search-container__search-bar">
                 <label htmlFor="searchStr">Search:</label>
                 <input
@@ -120,7 +127,6 @@ function SearchBar({ childToParent }) {
                 >
                     <SearchLogo />
                 </button>
-                <span>{searchStr}</span>
             </div>
         </form>
     );

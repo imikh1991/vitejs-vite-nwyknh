@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">46.15% </span>
+                <span class="strong">45.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/65</span>
+                <span class='fraction'>28/61</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">46.15% </span>
+                <span class="strong">45.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/65</span>
+                <span class='fraction'>28/61</span>
             </div>
         
             
@@ -124,11 +124,7 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -141,15 +137,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -169,14 +163,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -211,11 +203,9 @@ function Home() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showProgress, setShowProgress] = useState(true);
-    // fetchData();
     useEffect(() =&gt; {
-        // setTimeout
         const timer = setTimeout(() =&gt; {
-<span class="cstat-no" title="statement not covered" >            fetch(`https://rickandmortyapi.com/api/character?name=`)</span>
+<span class="cstat-no" title="statement not covered" >            fetch(`https://rickandmortyapi.com/api/character`)</span>
 <span class="cstat-no" title="statement not covered" >                .then((response) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                    if (response.ok) {</span>
 <span class="cstat-no" title="statement not covered" >                        return response.json();</span>
@@ -233,16 +223,14 @@ function Home() {
 <span class="cstat-no" title="statement not covered" >                .finally(() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                    setLoading(false);</span>
 <span class="cstat-no" title="statement not covered" >                });</span>
-<span class="cstat-no" title="statement not covered" >            setShowProgress(false); // hide progress bar after 2 seconds</span>
+<span class="cstat-no" title="statement not covered" >            setShowProgress(false);</span>
         }, 2000);
-        return () =&gt; clearTimeout(timer); // cleanup on unmount
+        return () =&gt; clearTimeout(timer);
     }, []);
     if (showProgress) {
         return &lt;ProgressBar /&gt;;
 <span class="branch-0 cbranch-no" title="branch not covered" >    } else if (loading) {</span>
 <span class="cstat-no" title="statement not covered" >        return &lt;ProgressBar /&gt;;</span>
-<span class="cstat-no" title="statement not covered" >    } else if (error) {</span>
-<span class="cstat-no" title="statement not covered" >        return 'Error!';</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const childToParent = <span class="fstat-no" title="function not covered" >(childdata) =&gt; {</span></span>
@@ -265,7 +253,7 @@ export default Home;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-08T18:26:36.053Z
+                at 2023-04-09T09:25:45.060Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

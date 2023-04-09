@@ -16,11 +16,9 @@ function Home() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showProgress, setShowProgress] = useState(true);
-    // fetchData();
     useEffect(() => {
-        // setTimeout
         const timer = setTimeout(() => {
-            fetch(`https://rickandmortyapi.com/api/character?name=`)
+            fetch(`https://rickandmortyapi.com/api/character`)
                 .then((response) => {
                     if (response.ok) {
                         return response.json();
@@ -38,14 +36,16 @@ function Home() {
                 .finally(() => {
                     setLoading(false);
                 });
-            setShowProgress(false); // hide progress bar after 2 seconds
+            setShowProgress(false);
         }, 2000);
-        return () => clearTimeout(timer); // cleanup on unmount
+        return () => clearTimeout(timer);
     }, []);
     if (showProgress) {
         return <ProgressBar />;
     } else if (loading) {
         return <ProgressBar />;
+    } else {
+        console.log(error);
     }
 
     const childToParent = (childdata) => {
