@@ -1,5 +1,3 @@
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
-
 export interface SearchBarProps {
     handleSearchClick?: () => void;
 }
@@ -54,56 +52,3 @@ export interface ICardProps {
 export interface ICardsProps {
     characters: ICharacter[];
 }
-
-export interface IFormFieldProps {
-    formField: IFormField;
-    register: UseFormRegister<Inputs>;
-    errors: FieldErrors<Inputs>;
-}
-
-export enum RegisterOptions {
-    image = 'image',
-    name = 'name',
-    status = 'status',
-    species = 'species',
-    gender = 'gender',
-    origin = 'origin',
-    location = 'location',
-    date = 'date',
-    consest = 'consest',
-}
-
-export interface IFormField {
-    type: string;
-    ids: string[];
-    register: 'image' | 'name' | 'status' | 'species' | 'gender' | 'origin' | 'location' | 'date' | 'consest';
-    labels: string[];
-    placeholder?: string;
-    required: string;
-    patern?: {
-        value: RegExp;
-        message: string;
-    };
-    minLength?: {
-        value: number;
-        message: string;
-    };
-    values?: string[];
-    options?: string[];
-}
-
-export interface ICharacterFormProps {
-    onSuccessSubmit: (character: ICharacter) => void;
-}
-
-export type Inputs = {
-    name: string;
-    status: string;
-    species: string;
-    gender: string;
-    origin: string;
-    location: string;
-    image: FileList;
-    date: string;
-    consest: boolean;
-};

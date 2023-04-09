@@ -130,3 +130,8 @@
   transform: none;
   background: whitesmoke;
 }
+
+.card p {
+  margin: 0 20px 20px;
+  color: #030303;
+}

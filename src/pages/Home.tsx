@@ -42,10 +42,11 @@ function Home() {
     }, []);
     if (showProgress) {
         return <ProgressBar />;
+    }
+    if (error) {
+        console.log(error);
     } else if (loading) {
         return <ProgressBar />;
-    } else {
-        console.log(error);
     }
 
     const childToParent = (childdata) => {

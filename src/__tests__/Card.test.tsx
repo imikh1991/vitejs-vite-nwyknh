@@ -8,8 +8,8 @@ import Modal from '../components/Modal/Modal';
 import SearchBar from '../components/SearchBar/SearchBar';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import { ICharacter } from '../models/types';
+const setIsOpen = () => {};
 describe('CardItem', () => {
-    const setIsOpen = () => {};
     const mockItem = {
         id: 15,
         name: 'Alien Rick',
@@ -47,6 +47,6 @@ describe('CardItem', () => {
     it('Container with cards display ', () => {
         const mockItems: ICharacter[] = [mockItem];
         render(<ContainerCards characters={mockItems} />);
-        expect(screen.getByTestId('search')).toBeDefined();
+        expect(screen.getByTestId('card-container')).toBeDefined();
     });
 });

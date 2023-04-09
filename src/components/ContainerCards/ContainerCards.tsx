@@ -5,7 +5,7 @@ import './ContainerCards.css';
 function ContainerCards(props: ICardsProps) {
     const characters = props.characters;
     return (
-        <div className="card-grid-container">
+        <div className="card-grid-container" data-testid="card-container">
             {characters.map((character: ICharacter) => {
                 return <Card character={character} key={String(character.id)} />;
             })}
