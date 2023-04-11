@@ -38,10 +38,6 @@ function SearchBar({ childToParent }) {
                     }
                     throw response;
                 })
-                .then((data) => {
-                    setCharacterData(data.results);
-                    childToParent(data.results);
-                })
                 .catch((error) => {
                     console.error(error);
                     alert('Error fetching data');
