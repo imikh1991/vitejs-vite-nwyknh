@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.61% </span>
+                <span class="strong">78.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>95/124</span>
+                <span class='fraction'>103/131</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">44.44% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>4/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.61% </span>
+                <span class="strong">78.62% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>95/124</span>
+                <span class='fraction'>103/131</span>
             </div>
         
             
@@ -187,8 +187,14 @@
 <a name='L122'></a><a href='#L122'>122</a>
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -212,6 +218,14 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -239,10 +253,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -314,7 +328,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
-import img from './tw-icon.png';
 &nbsp;
 // set up interface object
 interface FormData {
@@ -327,12 +340,20 @@ interface FormData {
 }
 &nbsp;
 function Form() {
+    const defaultValues = {
+        name: '',
+        picture: '',
+        dateOfBirth: '',
+        gender: '',
+        agreeToTerms: false,
+        favoriteColor: '',
+    };
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors, isSubmitSuccessful },
-    } = useForm();
+    } = useForm({ defaultValues });
     const [data, setData] = React.useState&lt;FormData[]&gt;([]);
 &nbsp;
     const onSubmit = <span class="fstat-no" title="function not covered" >(data, event) =&gt; {</span>
@@ -341,7 +362,7 @@ function Form() {
 <span class="cstat-no" title="statement not covered" >            if (data.picture) {</span>
 <span class="cstat-no" title="statement not covered" >                console.log(data.picture);</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >            setData((prevData) =&gt; [...prevData, data]);</span>
+<span class="cstat-no" title="statement not covered" >            setData((prevData) =&gt; [...prevData, structuredClone(data)]);</span>
 <span class="cstat-no" title="statement not covered" >            alert('Form successfully submitted');</span>
 <span class="cstat-no" title="statement not covered" >            event.preventDefault();</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e) {</span>
@@ -350,12 +371,11 @@ function Form() {
 <span class="cstat-no" title="statement not covered" >    };</span>
 &nbsp;
     const renderCard = <span class="fstat-no" title="function not covered" >({ name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }, index: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        // img стоит как заглушка</span>
-<span class="cstat-no" title="statement not covered" >        const imageUrl = picture.length &gt; 0 ? URL.createObjectURL(picture[0] as Blob) : img;</span>
+<span class="cstat-no" title="statement not covered" >        const imageUrl = picture.length &gt; 0 ? URL.createObjectURL(picture[0] as Blob) : '';</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className="card" key={index}&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;h2&gt;{name}&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;img src={imageUrl} alt="" /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                {imageUrl &amp;&amp; &lt;img src={imageUrl} alt="" /&gt;}</span>
 <span class="cstat-no" title="statement not covered" >                &lt;p&gt; Date: {dateOfBirth}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;h2&gt;Gender: {gender === 'male' ? '👦' : '👧'}&lt;/h2&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;p&gt;Checkbox: {agreeToTerms}&lt;/p&gt;</span>
@@ -364,13 +384,14 @@ function Form() {
 <span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >        );</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
+    const setOfCards = data.map((item, index) =&gt; renderCard(item, index));
 &nbsp;
     React.useEffect(() =&gt; {
         if (isSubmitSuccessful) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >            console.log('SubmitSuccessful');</span>
-<span class="cstat-no" title="statement not covered" >            reset();</span>
+<span class="cstat-no" title="statement not covered" >            reset(defaultValues);</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-    }, [isSubmitSuccessful, reset]);
+    });
 &nbsp;
     return (
         &lt;section onSubmit={handleSubmit(onSubmit)}&gt;
@@ -423,13 +444,13 @@ function Form() {
                         File Upload:
                     &lt;/label&gt;
                     &lt;input {...register('picture', { required: true })} type="file" id="file-upload" alt="" /&gt;
-                    {errors.<span class="branch-0 cbranch-no" title="branch not covered" >fileUpload &amp;&amp; &lt;span&gt;This field is required&lt;/span&gt;}</span>
+                    {errors.picture &amp;&amp; &lt;span&gt;This field is required&lt;/span&gt;}
                 &lt;/div&gt;
                 &lt;button disabled={!data} type="submit"&gt;
                     Submit
                 &lt;/button&gt;
             &lt;/form&gt;
-            &lt;div className="card-grid-container"&gt;{data.map((item, index) =&gt; renderCard(item, index))}&lt;/div&gt;
+            &lt;div className="card-grid-container"&gt;{setOfCards}&lt;/div&gt;
         &lt;/section&gt;
     );
 }
@@ -442,7 +463,7 @@ export default Form;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-01T16:33:36.984Z
+                at 2023-04-11T06:38:11.529Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

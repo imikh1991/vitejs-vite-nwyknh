@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './SearchBar.css';
 import SearchLogo from './SearchLogo';
-
-function SearchBar() {
+import { ICharacter } from '../../models/types';
+function SearchBar({ childToParent }) {
+    const [characterData, setCharacterData] = useState<ICharacter[]>([]);
     const {
         register,
         handleSubmit,
         formState: { errors },
-        reset,
     } = useForm();
 
-    const [searchStr, setSearchStr] = useState('');
-
-    useEffect(() => {
-        const storedValue = localStorage.getItem('searchStr');
-        if (storedValue) {
-            setSearchStr(storedValue);
-        }
-    }, []);
+    const [searchStr, setSearchStr] = useState(' ');
 
     const onSubmit = (data, event) => {
         try {
-            console.log(data);
             setSearchStr(data.searchStr);
             localStorage.setItem('searchStr', data.searchStr);
             alert('Form successfully submitted');
-            reset();
             event.preventDefault();
+            const storedValue = localStorage.getItem('searchStr');
+            if (storedValue) {
+                setSearchStr(storedValue);
+            }
         } catch (e) {
             console.error(e);
         }
@@ -35,10 +30,49 @@ function SearchBar() {
 
     const handleChange = (event) => {
         setSearchStr(event.target.value);
+        try {
+            fetch(`https://rickandmortyapi.com/api/character?name=${searchStr}`)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw response;
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert('Error fetching data');
+                })
+                .finally(() => {});
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleFormSubmit = (event) => {
+        try {
+            fetch(`https://rickandmortyapi.com/api/character?name=${searchStr}`)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw response;
+                })
+                .then((data) => {
+                    setCharacterData(data.results);
+                    childToParent(data.results);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert('Error fetching data');
+                })
+                .finally(() => {});
+        } catch (error) {
+            console.log(error);
+        }
         console.log('Was submitted: ' + searchStr);
+        if (!characterData) {
+            alert('Nothing to display');
+        }
         event.preventDefault();
     };
 
@@ -49,7 +83,7 @@ function SearchBar() {
     }, [searchStr]);
 
     return (
-        <form className="search-container" onSubmit={handleSubmit(onSubmit)}>
+        <form className="search-container" data-testid="search" onSubmit={handleSubmit(onSubmit)}>
             <div className="search-container__search-bar">
                 <label htmlFor="searchStr">Search:</label>
                 <input
@@ -71,7 +105,6 @@ function SearchBar() {
                 >
                     <SearchLogo />
                 </button>
-                <span>{searchStr}</span>
             </div>
         </form>
     );

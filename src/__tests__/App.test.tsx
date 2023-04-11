@@ -15,6 +15,8 @@ describe('App', () => {
 
     it('renders Not Found page component', () => {
         render(<NotFound />);
-        expect(screen.getByText(/This is Not Found 404/i)).toBeDefined();
+        expect(
+            screen.getByText(/This is Not Found This Universe it does not exist. Wubba Lubba Dub Dub!/i)
+        ).toBeDefined();
     });
 });
