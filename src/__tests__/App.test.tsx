@@ -4,7 +4,6 @@
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 import { describe, expect, it } from 'vitest';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
 import NotFound from '../pages/NotFound';
 
 describe('App', () => {
