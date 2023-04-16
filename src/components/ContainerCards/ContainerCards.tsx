@@ -11,13 +11,13 @@ interface ContainerCardsProps {
 info: Info[];
     results: ICharacter[];
 */
-const ContainerCards: React.FC<ContainerCardsProps> = ({ data }) => {
+const ContainerCards: React.FC<ContainerCardsProps> = ({ data, open, loading }) => {
     console.log('Results:', data);
     return (
         <div className="card-grid-container" data-testid="card-container">
             {Array.isArray(data) &&
                 data?.map((character) => {
-                    return <Card character={character} key={String(character.id)} />;
+                    return <Card character={character} key={String(character.id)} open={open} />;
                 })}
         </div>
     );

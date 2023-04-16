@@ -54,6 +54,7 @@ export interface IHeaderProps {
 export interface ICardProps {
     character: ICharacter;
     key: string;
+    open: (id?: string | number) => void;
 }
 
 export interface ICardsProps {

@@ -1,4 +1,3 @@
-import HTMLReactParser from 'html-react-parser';
 import { useHttp } from '../../../hooks/use-http';
 import { useMount } from '../../../hooks/use-mount';
 import { ICharacter } from '../../../models/types';
@@ -10,7 +9,7 @@ const idRequest = (id: number | string) => {
 interface CardDataProps {
     id: string | number | null;
 }
-export const CardData: React.FC<CardDataProps> = ({ id }) => {
+const CardData: React.FC<CardDataProps> = ({ id }) => {
     const { loading, data, request } = useHttp<ICharacter>();
 
     useMount(() => {
@@ -26,8 +25,11 @@ export const CardData: React.FC<CardDataProps> = ({ id }) => {
                 <p>{data?.species}</p>
                 <p>{data?.gender}</p>
                 <p>{data?.location.name}</p>
+                <p>{data?.created}</p>
                 <a href="https://rickandmortyapi.com/">Arhhh!</a>
             </div>
         </>
     );
 };
+
+export default CardData;

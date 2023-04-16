@@ -7,11 +7,9 @@ export const characterApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HEROES_API_ALL }),
     endpoints: (builder) => ({
         getCharacterByName: builder.query<ApiResponse, string>({
-            query: (name) => `character/${name}`,
+            query: (name) => `character/?name=${name}`,
         }),
     }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const { useGetCharacterByNameQuery } = characterApi;
