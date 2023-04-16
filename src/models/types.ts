@@ -1,5 +1,17 @@
+export interface SearchProps {
+    value: string;
+    onSearchChange: (value: string) => void;
+    handleClick: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
 export interface SearchBarProps {
     handleSearchClick?: () => void;
+}
+
+export interface IModalProps {
+    onClose: () => void;
+    children?: React.ReactNode;
+    title: string;
 }
 
 export interface ICharacter {
@@ -23,21 +35,16 @@ export interface ICharacter {
     created: string;
 }
 
-export interface IModalProps {
-    setIsOpen: (isOpen: boolean) => void;
-    character: ICharacter;
+export interface Info {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
 }
 
-export interface ILikeRepository {
-    add: (key: number) => void;
-    remove: (key: number) => void;
-    findLike: (key: number) => boolean;
-}
-
-export interface IViewRepository {
-    add: (key: number) => void;
-    remove: (key: number) => void;
-    findView: (key: number) => boolean;
+export interface ApiResponse {
+    info: Info[];
+    results: ICharacter[];
 }
 
 export interface IHeaderProps {

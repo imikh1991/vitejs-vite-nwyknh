@@ -1,16 +1,26 @@
 import Card from '../Card/Card';
-import { ICardsProps, ICharacter } from '../../models/types';
+import { ICharacter } from '../../models/types';
 import './ContainerCards.css';
 
-function ContainerCards(props: ICardsProps) {
-    const characters = props.characters;
+interface ContainerCardsProps {
+    data: ICharacter[] | undefined;
+    open: () => void;
+    loading: boolean;
+}
+/* 
+info: Info[];
+    results: ICharacter[];
+*/
+const ContainerCards: React.FC<ContainerCardsProps> = ({ data }) => {
+    console.log('Results:', data);
     return (
         <div className="card-grid-container" data-testid="card-container">
-            {characters.map((character: ICharacter) => {
-                return <Card character={character} key={String(character.id)} />;
-            })}
+            {Array.isArray(data) &&
+                data?.map((character) => {
+                    return <Card character={character} key={String(character.id)} />;
+                })}
         </div>
     );
-}
+};
 
 export default ContainerCards;

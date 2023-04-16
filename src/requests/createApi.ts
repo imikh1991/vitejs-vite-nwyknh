@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ICardsProps } from '../models/types';
+import type { ApiResponse } from '../models/types';
+import { HEROES_API_ALL } from '../const/api-query';
 
-export const pokemonApi = createApi({
-    reducerPath: 'pokemonApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api/' }),
+export const characterApi = createApi({
+    reducerPath: 'characterApi',
+    baseQuery: fetchBaseQuery({ baseUrl: HEROES_API_ALL }),
     endpoints: (builder) => ({
-        getPokemonByName: builder.query<ICardsProps, string>({
+        getCharacterByName: builder.query<ApiResponse, string>({
             query: (name) => `character/${name}`,
         }),
     }),
@@ -13,4 +14,4 @@ export const pokemonApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetPokemonByNameQuery } = pokemonApi;
+export const { useGetCharacterByNameQuery } = characterApi;

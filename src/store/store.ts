@@ -1,42 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit';
-// Or from '@reduxjs/toolkit/query/react'
-import { setupListeners } from '@reduxjs/toolkit/query';
-import { pokemonApi } from '../requests/createApi';
-// import { animeAPI } from '../service/AnimeService';
-// import searchReducer from '../store/reducers/SearchSlice';
-
-export const store = configureStore({
-    reducer: {
-        // Add the generated reducer as a specific top-level slice
-        [pokemonApi.reducerPath]: pokemonApi.reducer,
-    },
-    // Adding the api middleware enables caching, invalidation, polling,
-    // and other useful features of `rtk-query`.
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(pokemonApi.middleware),
-});
-
-// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
-// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
-setupListeners(store.dispatch);
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-/* настроен store
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { searchSliceReducer } from './reducers/SearchReducer';
+// Or from '@reduxjs/toolkit/query/react'
+import { characterApi } from '../requests/createApi';
+import searchReducer from '../store/reducers/SearchSlice';
 
 const rootReducer = combineReducers({
-  searchSliceReducer,
+    searchReducer,
+    [characterApi.reducerPath]: characterApi.reducer,
 });
 
 export const setupStore = () => {
-  return configureStore({
-    reducer: rootReducer,
-  });
+    return configureStore({
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(characterApi.middleware),
+    });
 };
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
-*/
+export type AppState = ReturnType<typeof setupStore>;
+export type AppDispatch = AppState['dispatch'];
