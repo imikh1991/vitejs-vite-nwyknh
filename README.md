@@ -20,7 +20,7 @@
 
 ## 3-rd party API
 
-API Anime ([rickandmortyapi.com](https://rickandmortyapi.com/documentation/#get-all-characters))
+API Rick and Morty ([rickandmortyapi.com](https://rickandmortyapi.com/documentation/#get-all-characters))
 
 ## How run locally
 
