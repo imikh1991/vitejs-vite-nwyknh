@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
+import { useAppDispatch } from '../../store/hooks';
+import { formIsSubmited } from '../../store/reducers/FormSlice';
 
 // set up interface object
 interface FormData {
@@ -28,6 +30,12 @@ function Form() {
         formState: { errors, isSubmitSuccessful },
     } = useForm({ defaultValues });
     const [data, setData] = React.useState<FormData[]>([]);
+
+    // dispatch работает в связке с событием которое нужно обработать
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(formIsSubmited(data));
+    }, [data, dispatch]);
 
     const onSubmit = (data, event) => {
         try {
@@ -79,7 +87,12 @@ function Form() {
 
                 <div>
                     <label htmlFor="dateOfBirth">Date of Birth:</label>
-                    <input type="date" id="dateOfBirth" {...register('dateOfBirth', { required: true })} />
+                    <input
+                        type="date"
+                        data-testid="dateOfBirth"
+                        id="dateOfBirth"
+                        {...register('dateOfBirth', { required: true })}
+                    />
                     {errors.dateOfBirth && <span>This field is required</span>}
                 </div>
 
@@ -102,7 +115,7 @@ function Form() {
                 </div>
 
                 <div>
-                    <label>Favorite color:</label>
+                    <label htmlFor="favorite color">Favorite color:</label>
                     <input type="radio" id="red" value="red" {...register('favoriteColor', { required: true })} />
                     <label htmlFor="red">Red</label>
                     <input type="radio" id="green" value="green" {...register('favoriteColor', { required: true })} />

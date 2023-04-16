@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import SearchBar from '../components/SearchBar/SearchBar';
 import '../main.css';
@@ -11,7 +10,7 @@ import '../components/Modal/Modal.css';
 import { useGetCharacterByNameQuery } from '../requests/createApi';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ProgressBar from '../components/ProgressBar/ProgressBar';
-import { ICharacter, ApiResponse } from '../models/types';
+import { ApiResponse } from '../models/types';
 import { searchValueSelector } from '../store/selectors/search';
 import { setSearch, setCharacter } from '../store/reducers/SearchSlice';
 import { useModal } from '../hooks/use-modal';
@@ -20,14 +19,15 @@ import CardData from '../components/ContainerCards/CardData/CardData';
 
 function Home() {
     const search = useAppSelector(searchValueSelector);
+
     const [enterSearch, setEnterSearch] = React.useState(search);
 
-    console.log('поисковая строка enterSearch>>>>', enterSearch);
-    const dispatch = useAppDispatch();
     const { data: character, error, isLoading } = useGetCharacterByNameQuery(search);
-    console.log('Из API у тебя пришло>>>', useGetCharacterByNameQuery(search));
-    console.log('твой character>>>', character);
+
     const handleSearchChange = (value: string) => dispatch(setSearch(value));
+
+    // dispatch работает в связке с событием которое нужно обработать
+    const dispatch = useAppDispatch();
 
     const { openModal, closeModal, modal } = useModal();
     const [clickedData, setClickedData] = React.useState<null | string>(null);
@@ -37,6 +37,7 @@ function Home() {
             e.preventDefault();
             setEnterSearch(search);
             dispatch(setCharacter(character as ApiResponse));
+            dispatch(setSearch(enterSearch));
         }
     };
 
@@ -44,6 +45,9 @@ function Home() {
         openModal();
         setClickedData(id as string);
     };
+    if (error) {
+        console.log('useGetCharacterByNameQuery error>>>', error);
+    }
 
     return (
         <div className="Home">

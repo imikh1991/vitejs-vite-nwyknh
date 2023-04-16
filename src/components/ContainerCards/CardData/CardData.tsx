@@ -15,6 +15,9 @@ const CardData: React.FC<CardDataProps> = ({ id }) => {
     useMount(() => {
         request(idRequest(id as string));
     });
+    if (loading) {
+        console.log(loading);
+    }
 
     return (
         <>

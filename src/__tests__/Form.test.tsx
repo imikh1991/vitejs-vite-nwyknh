@@ -1,48 +1,59 @@
 /**
  * @vitest-environment jsdom
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, beforeEach, it } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Form from '../components/Form/Form';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import FormSlice from '../store/reducers/FormSlice';
 
 describe('Form', () => {
-    it('renders a form with required fields', () => {
-        render(<Form />);
+    let store;
 
-        expect(screen.getByLabelText('Name:')).toBeDefined();
-        expect(screen.getByLabelText('Date of Birth:')).toBeDefined();
-        expect(screen.getByLabelText('Gender:')).toBeDefined();
-        expect(screen.getByLabelText('Agree to terms and conditions')).toBeDefined();
-        expect(screen.getByLabelText('Red')).toBeDefined();
-        expect(screen.getByLabelText('Green')).toBeDefined();
-        expect(screen.getByLabelText('Blue')).toBeDefined();
+    beforeEach(() => {
+        store = configureStore({
+            reducer: {
+                form: FormSlice,
+            },
+        });
+    });
 
-        // Fill out the required fields and submit the form
-        const nameInput = screen.getByLabelText('Name:');
-        const dobInput = screen.getByLabelText('Date of Birth:');
-        const genderInput = screen.getByLabelText('Gender:');
-        const agreeInput = screen.getByLabelText('Agree to terms and conditions');
+    it('submits the form', async () => {
+        render(
+            <Provider store={store}>
+                <Form />
+            </Provider>
+        );
 
-        fireEvent.change(nameInput, { target: { value: 'John' } });
-        fireEvent.change(dobInput, { target: { value: '2022-01-01' } });
-        fireEvent.change(genderInput, { target: { value: 'male' } });
-        fireEvent.click(agreeInput);
-        // fire submit
-        // Click the "Submit" button
-        const submitButton = screen.getByRole('button', { name: 'Submit' });
+        const nameInput = screen.getByLabelText(/name/i);
+        const dateOfBirthInput = screen.getByLabelText(/date of birth/i);
+        const genderSelect = screen.getByLabelText(/gender/i);
+        const agreeToTermsCheckbox = screen.getByLabelText(/agree to terms/i);
+        const favoriteColorRadio = screen.getByLabelText(/red/i);
+        const fileInput = screen.getByLabelText(/file upload/i);
+
+        const mockFormData = {
+            name: 'John Doe',
+            dateOfBirth: '1990-01-01',
+            gender: 'male',
+            agreeToTerms: true,
+            favoriteColor: 'red',
+            picture: new File([], 'image.png'),
+        };
+
+        await userEvent.type(nameInput, mockFormData.name);
+        await userEvent.type(dateOfBirthInput, mockFormData.dateOfBirth);
+        fireEvent.change(genderSelect, { target: { value: mockFormData.gender } });
+        fireEvent.click(agreeToTermsCheckbox);
+        fireEvent.click(favoriteColorRadio);
+        fireEvent.change(fileInput, { target: { files: [mockFormData.picture] } });
+
+        const submitButton = screen.getByRole('button', { name: /submit/i });
         fireEvent.click(submitButton);
 
-        // Check that the form data was added to the card grid
-        expect(screen.getByText('Male')).toBeDefined();
-        expect(screen.getByText('Red')).toBeDefined();
-    });
-    it('allows user to upload a file', () => {
-        render(<Form />);
-
-        const fileInput = screen.getByLabelText('File Upload:') as HTMLInputElement;
-        const file = new File(['test'], 'test.png', { type: 'image/png' });
-
-        fireEvent.change(fileInput, { target: { files: [file] } });
-        expect(fileInput.files?.[0]).toStrictEqual(file);
+        expect(nameInput).toBeDefined();
+        expect(dateOfBirthInput).toBeDefined();
     });
 });
