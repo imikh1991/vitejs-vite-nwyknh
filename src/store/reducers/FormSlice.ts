@@ -1,52 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ICharacter, ICharacterFormState } from '../../models/types';
 
-interface FormState {
-    form: string;
-    formResults: FormData[] | undefined;
-}
-
-/* export interface FormData {
-    key: number;
-    characters: Hero[];
-}
-
-interface Hero {
-    name: string;
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    picture: { [key: number]: {} };
-    dateOfBirth: string;
-    gender: 'male' | 'female' | 'non-binary';
-    agreeToTerms: boolean;
-    favoriteColor?: string;
-}
-*/
-interface FormData {
-    name: string;
-    picture: FileList;
-    dateOfBirth: string;
-    gender: string;
-    agreeToTerms: boolean;
-    favoriteColor: string;
-}
-
-const initialState: FormState = {
-    form: '',
-    formResults: [],
+const initialState: ICharacterFormState = {
+    value: [],
 };
 
-export const FormSlice = createSlice({
-    name: 'form',
+export const CharacterFormSlice = createSlice({
+    name: 'charcterForm',
     initialState,
     reducers: {
-        formIsSubmited(state, action: PayloadAction<Array<FormData>>) {
-            const formData = action.payload;
-            state.formResults = formData;
+        addCharacter: (state, action: PayloadAction<ICharacter>) => {
+            state.value.push(action.payload);
         },
     },
 });
 
-const { actions, reducer } = FormSlice;
+export const { addCharacter } = CharacterFormSlice.actions;
 
-export const { formIsSubmited } = actions;
-
-export default reducer;
+export default CharacterFormSlice.reducer;

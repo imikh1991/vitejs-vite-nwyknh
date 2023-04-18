@@ -1,7 +1,28 @@
+// import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query/fetchBaseQuery';
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
+
+export interface defaultValues {
+    name: '';
+    picture: '';
+    dateOfBirth: '';
+    gender: '';
+    agreeToTerms: false;
+    favoriteColor: '';
+}
+
 export interface SearchProps {
     value: string;
     onSearchChange: (value: string) => void;
     handleClick: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+export interface FormData {
+    name: string;
+    picture: FileList;
+    dateOfBirth: string;
+    gender: string;
+    agreeToTerms: boolean;
+    favoriteColor: string;
 }
 
 export interface SearchBarProps {
@@ -59,4 +80,45 @@ export interface ICardProps {
 
 export interface ICardsProps {
     characters: ICharacter[];
+}
+
+export interface ICharacterFormState {
+    value: ICharacter[];
+}
+
+export interface IFormField {
+    type: string;
+    ids: string[];
+    register: 'image' | 'name' | 'status' | 'species' | 'gender' | 'origin' | 'location' | 'date' | 'consest';
+    labels: string[];
+    placeholder?: string;
+    required: string;
+    patern?: {
+        value: RegExp;
+        message: string;
+    };
+    minLength?: {
+        value: number;
+        message: string;
+    };
+    values?: string[];
+    options?: string[];
+}
+
+export type Inputs = {
+    name: string;
+    status: string;
+    species: string;
+    gender: string;
+    origin: string;
+    location: string;
+    image: FileList;
+    date: string;
+    consest: boolean;
+};
+
+export interface IFormFieldProps {
+    formField: IFormField;
+    register: UseFormRegister<Inputs>;
+    errors: FieldErrors<Inputs>;
 }

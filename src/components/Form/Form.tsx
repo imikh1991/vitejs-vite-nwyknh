@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
 import { useAppDispatch } from '../../store/hooks';
-import { formIsSubmited } from '../../store/reducers/FormSlice';
+import { addCharacter } from '../../store/reducers/FormSlice';
 
 // set up interface object
 interface FormData {
@@ -15,6 +15,7 @@ interface FormData {
 }
 
 function Form() {
+    const dispatch = useAppDispatch();
     const defaultValues = {
         name: '',
         picture: '',
@@ -32,19 +33,13 @@ function Form() {
     const [data, setData] = React.useState<FormData[]>([]);
 
     // dispatch работает в связке с событием которое нужно обработать
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(formIsSubmited(data));
-    }, [data, dispatch]);
 
     const onSubmit = (data, event) => {
         try {
             console.log(typeof data);
-            if (data.picture) {
-                console.log(data.picture);
-            }
             setData((prevData) => [...prevData, structuredClone(data)]);
             alert('Form successfully submitted');
+            dispatch(addCharacter(data));
             event.preventDefault();
         } catch (e) {
             console.error(e);
