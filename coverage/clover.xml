@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681916948364" clover="3.2.0">
-  <project timestamp="1681916948364" name="All files">
-    <metrics statements="206" coveredstatements="198" conditionals="10" coveredconditionals="10" methods="15" coveredmethods="9" elements="231" coveredelements="217" complexity="0" loc="206" ncloc="206" packages="7" files="9" classes="9"/>
+<coverage generated="1681918344353" clover="3.2.0">
+  <project timestamp="1681918344353" name="All files">
+    <metrics statements="202" coveredstatements="194" conditionals="10" coveredconditionals="10" methods="15" coveredmethods="9" elements="227" coveredelements="213" complexity="0" loc="202" ncloc="202" packages="7" files="9" classes="9"/>
     <package name="components.Card">
       <metrics statements="16" coveredstatements="16" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1"/>
       <file name="Card.tsx" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/components/Card/Card.tsx">
@@ -228,9 +228,9 @@
       </file>
     </package>
     <package name="store.reducers">
-      <metrics statements="23" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="19" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="FormSlice.ts" path="/Users/ilya_mikhaylyukov/Documents/GitHub/vitejs-vite-nwyknh/src/store/reducers/FormSlice.ts">
-        <metrics statements="23" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="19" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -242,18 +242,14 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
       </file>
     </package>
   </project>

@@ -54,7 +54,7 @@ function Form() {
         { name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }: FormData,
         index: number
     ) => {
-        const imageUrl = URL.createObjectURL(picture[0] as Blob);
+        const imageUrl = URL.createObjectURL(picture[0]);
         return (
             <div className="card" key={index}>
                 <h2>{name}</h2>
