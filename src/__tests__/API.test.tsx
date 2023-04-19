@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react';
 import Card from '../components/Card/Card';
-import { beforeAll, afterEach, afterAll, describe, expect, it } from 'vitest';
+import { beforeAll, afterEach, afterAll, describe, expect, it, vi } from 'vitest';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -47,8 +47,9 @@ afterAll(() => {
 });
 
 describe('API call coverage and response', () => {
+    const open = vi.fn();
     it('renders data fetched from API', async () => {
-        render(<Card character={mockItem} key={String(mockItem.id)} />);
+        render(<Card character={mockItem} key={String(mockItem.id)} open={open} />);
         await screen.findByTestId('card');
         expect(screen.getByTestId('card')).toBeDefined();
     });

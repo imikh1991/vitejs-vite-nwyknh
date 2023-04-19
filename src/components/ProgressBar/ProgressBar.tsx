@@ -11,7 +11,7 @@ const Progress = ({ done }) => {
         };
 
         setStyle(newStyle);
-    }, 1000);
+    }, 100);
 
     return (
         <div className="progress">

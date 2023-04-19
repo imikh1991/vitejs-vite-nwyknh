@@ -2,14 +2,18 @@
  * @vitest-environment jsdom
  */
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import Card from '../components/Card/Card';
 import Modal from '../components/Modal/Modal';
 import SearchBar from '../components/SearchBar/SearchBar';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import { ICharacter } from '../models/types';
-const setIsOpen = () => {};
+
 describe('CardItem', () => {
+    const onClose = vi.fn();
+    const open = vi.fn();
+    const value = vi.fn();
+
     const mockItem = {
         id: 15,
         name: 'Alien Rick',
@@ -32,21 +36,21 @@ describe('CardItem', () => {
     };
 
     it('Card should be shown', () => {
-        render(<Card character={mockItem} key={String(mockItem.id)} />);
+        render(<Card character={mockItem} key={String(mockItem.id)} open={open} />);
         expect(screen.getByTestId('card')).toBeDefined();
     });
     it('Modal widow display ', () => {
-        render(<Modal setIsOpen={setIsOpen} character={mockItem} />);
+        render(<Modal onClose={onClose} title={'HERO'} />);
         expect(screen.getByTestId('modal')).toBeDefined();
     });
     it('Search Bar display ', () => {
-        render(<SearchBar childToParent={mockItem.name} />);
+        render(<SearchBar value={'modal'} onSearchChange={value} handleClick={value} />);
         expect(screen.getByTestId('search')).toBeDefined();
     });
 
     it('Container with cards display ', () => {
-        const mockItems: ICharacter[] = [mockItem];
-        render(<ContainerCards characters={mockItems} />);
+        const mockData: ICharacter[] = [mockItem];
+        render(<ContainerCards data={mockData} open={value} loading={true} />);
         expect(screen.getByTestId('card-container')).toBeDefined();
     });
 });

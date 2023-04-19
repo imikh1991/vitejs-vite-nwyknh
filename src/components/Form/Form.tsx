@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { addCharacter } from '../../store/reducers/FormSlice';
+import { formIsSubmitedSelector } from '../../store/selectors/search';
 
 // set up interface object
 interface FormData {
     name: string;
-    picture: FileList;
+    picture: DataTransfer;
     dateOfBirth: string;
     gender: string;
     agreeToTerms: boolean;
@@ -13,38 +16,45 @@ interface FormData {
 }
 
 function Form() {
-    const defaultValues = {
-        name: '',
-        picture: '',
-        dateOfBirth: '',
-        gender: '',
-        agreeToTerms: false,
-        favoriteColor: '',
-    };
+    const dispatch = useAppDispatch();
+    const defaultValues = useMemo(
+        () => ({
+            name: '',
+            picture: new DataTransfer().files,
+            dateOfBirth: '',
+            gender: '',
+            agreeToTerms: false,
+            favoriteColor: '',
+        }),
+        []
+    );
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors, isSubmitSuccessful },
-    } = useForm({ defaultValues });
-    const [data, setData] = React.useState<FormData[]>([]);
+    } = useForm<FormData>({});
 
-    const onSubmit = (data, event) => {
+    const [data, setData] = React.useState<FormData[]>([]);
+    const formIsSubmitted = useAppSelector(formIsSubmitedSelector);
+
+    const onSubmit = (data: FormData, event) => {
         try {
             console.log(typeof data);
-            if (data.picture) {
-                console.log(data.picture);
-            }
-            setData((prevData) => [...prevData, structuredClone(data)]);
+            setData((prevData) => [...prevData, data]);
             alert('Form successfully submitted');
+            dispatch(addCharacter(data));
             event.preventDefault();
         } catch (e) {
             console.error(e);
         }
     };
 
-    const renderCard = ({ name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }, index: number) => {
-        const imageUrl = picture.length > 0 ? URL.createObjectURL(picture[0] as Blob) : '';
+    const renderCard = (
+        { name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }: FormData,
+        index: number
+    ) => {
+        const imageUrl = URL.createObjectURL(picture[0]);
         return (
             <div className="card" key={index}>
                 <h2>{name}</h2>
@@ -57,14 +67,18 @@ function Form() {
             </div>
         );
     };
-    const setOfCards = data.map((item, index) => renderCard(item, index));
 
     React.useEffect(() => {
         if (isSubmitSuccessful) {
             console.log('SubmitSuccessful');
-            reset(defaultValues);
+            // reset();
+            // код супер колхозный но умнее не могу придумать ничего :(
+            console.log(formIsSubmitted);
+            setData(formIsSubmitted);
         }
-    });
+    }, [isSubmitSuccessful, reset, defaultValues, formIsSubmitted]);
+
+    const setOfCards = formIsSubmitted.map((item, index) => renderCard(item, index));
 
     return (
         <section onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +93,12 @@ function Form() {
 
                 <div>
                     <label htmlFor="dateOfBirth">Date of Birth:</label>
-                    <input type="date" id="dateOfBirth" {...register('dateOfBirth', { required: true })} />
+                    <input
+                        type="date"
+                        data-testid="dateOfBirth"
+                        id="dateOfBirth"
+                        {...register('dateOfBirth', { required: true })}
+                    />
                     {errors.dateOfBirth && <span>This field is required</span>}
                 </div>
 
@@ -102,7 +121,7 @@ function Form() {
                 </div>
 
                 <div>
-                    <label>Favorite color:</label>
+                    <label htmlFor="favorite color">Favorite color:</label>
                     <input type="radio" id="red" value="red" {...register('favoriteColor', { required: true })} />
                     <label htmlFor="red">Red</label>
                     <input type="radio" id="green" value="green" {...register('favoriteColor', { required: true })} />

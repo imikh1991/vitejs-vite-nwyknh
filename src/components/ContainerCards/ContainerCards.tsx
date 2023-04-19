@@ -1,16 +1,24 @@
 import Card from '../Card/Card';
-import { ICardsProps, ICharacter } from '../../models/types';
+import { ICharacter } from '../../models/types';
 import './ContainerCards.css';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
-function ContainerCards(props: ICardsProps) {
-    const characters = props.characters;
+interface ContainerCardsProps {
+    data: ICharacter[] | undefined;
+    open: () => void;
+    loading: boolean;
+}
+
+const ContainerCards: React.FC<ContainerCardsProps> = ({ data, open, loading }) => {
     return (
         <div className="card-grid-container" data-testid="card-container">
-            {characters.map((character: ICharacter) => {
-                return <Card character={character} key={String(character.id)} />;
-            })}
+            {loading && <ProgressBar />}
+            {Array.isArray(data) &&
+                data?.map((character) => {
+                    return <Card character={character} key={String(character.id)} open={open} />;
+                })}
         </div>
     );
-}
+};
 
 export default ContainerCards;
