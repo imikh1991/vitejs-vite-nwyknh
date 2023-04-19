@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import './Form.css';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addCharacter } from '../../store/reducers/FormSlice';
+import { formIsSubmitedSelector } from '../../store/selectors/search';
 
 // set up interface object
 interface FormData {
     name: string;
-    picture: FileList;
+    picture: DataTransfer;
     dateOfBirth: string;
     gender: string;
     agreeToTerms: boolean;
@@ -16,28 +17,31 @@ interface FormData {
 
 function Form() {
     const dispatch = useAppDispatch();
-    const defaultValues = {
-        name: '',
-        picture: '',
-        dateOfBirth: '',
-        gender: '',
-        agreeToTerms: false,
-        favoriteColor: '',
-    };
+    const defaultValues = useMemo(
+        () => ({
+            name: '',
+            picture: new DataTransfer().files,
+            dateOfBirth: '',
+            gender: '',
+            agreeToTerms: false,
+            favoriteColor: '',
+        }),
+        []
+    );
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors, isSubmitSuccessful },
-    } = useForm({ defaultValues });
+    } = useForm<FormData>({});
+
     const [data, setData] = React.useState<FormData[]>([]);
+    const formIsSubmitted = useAppSelector(formIsSubmitedSelector);
 
-    // dispatch работает в связке с событием которое нужно обработать
-
-    const onSubmit = (data, event) => {
+    const onSubmit = (data: FormData, event) => {
         try {
             console.log(typeof data);
-            setData((prevData) => [...prevData, structuredClone(data)]);
+            setData((prevData) => [...prevData, data]);
             alert('Form successfully submitted');
             dispatch(addCharacter(data));
             event.preventDefault();
@@ -46,8 +50,11 @@ function Form() {
         }
     };
 
-    const renderCard = ({ name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }, index: number) => {
-        const imageUrl = picture.length > 0 ? URL.createObjectURL(picture[0] as Blob) : '';
+    const renderCard = (
+        { name, picture, dateOfBirth, gender, agreeToTerms, favoriteColor }: FormData,
+        index: number
+    ) => {
+        const imageUrl = URL.createObjectURL(picture[0] as Blob);
         return (
             <div className="card" key={index}>
                 <h2>{name}</h2>
@@ -60,14 +67,18 @@ function Form() {
             </div>
         );
     };
-    const setOfCards = data.map((item, index) => renderCard(item, index));
 
     React.useEffect(() => {
         if (isSubmitSuccessful) {
             console.log('SubmitSuccessful');
-            reset(defaultValues);
+            // reset();
+            // код супер колхозный но умнее не могу придумать ничего :(
+            console.log(formIsSubmitted);
+            setData(formIsSubmitted);
         }
-    });
+    }, [isSubmitSuccessful, reset, defaultValues, formIsSubmitted]);
+
+    const setOfCards = formIsSubmitted.map((item, index) => renderCard(item, index));
 
     return (
         <section onSubmit={handleSubmit(onSubmit)}>

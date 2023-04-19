@@ -18,7 +18,7 @@ export interface SearchProps {
 
 export interface FormData {
     name: string;
-    picture: FileList;
+    picture: DataTransfer;
     dateOfBirth: string;
     gender: string;
     agreeToTerms: boolean;
@@ -83,7 +83,7 @@ export interface ICardsProps {
 }
 
 export interface ICharacterFormState {
-    value: ICharacter[];
+    value: FormData[];
 }
 
 export interface IFormField {

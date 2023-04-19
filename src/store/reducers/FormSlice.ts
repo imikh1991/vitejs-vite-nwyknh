@@ -1,16 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICharacter, ICharacterFormState } from '../../models/types';
+import { FormData, ICharacterFormState } from '../../models/types';
 
 const initialState: ICharacterFormState = {
     value: [],
 };
-
 export const CharacterFormSlice = createSlice({
     name: 'charcterForm',
     initialState,
     reducers: {
-        addCharacter: (state, action: PayloadAction<ICharacter>) => {
-            state.value.push(action.payload);
+        addCharacter: (state, action: PayloadAction<FormData>) => {
+            state.value = state.value.concat(action.payload);
         },
     },
 });
