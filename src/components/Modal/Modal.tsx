@@ -12,7 +12,7 @@ const Modal = ({ onClose, children, title }: IModalProps) => {
                     <div className="modalHeader">
                         <h5 className="heading">{title}</h5>
                     </div>
-                    <button className="closeBtn" onClick={onClose}>
+                    <button className="closeBtn" data-testid="modalCloseBtn" onClick={onClose}>
                         <RiCloseLine style={{ marginBottom: '-3px' }} />
                     </button>
                     <div className="modalContent">

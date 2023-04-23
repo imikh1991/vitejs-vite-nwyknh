@@ -4,11 +4,11 @@ import App from './App';
 import React from 'react';
 
 ReactDOM.hydrateRoot(
-    document.getElementById('app') as HTMLElement,
-    <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </React.StrictMode>
+  document.getElementById('app') as HTMLElement,
+  <React.StrictMode>
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+  </React.StrictMode>
 );
 console.log('hydrated');

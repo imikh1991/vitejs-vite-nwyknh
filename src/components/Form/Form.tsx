@@ -114,7 +114,13 @@ function Form() {
 
                 <div>
                     <label htmlFor="agreeToTerms">
-                        <input type="checkbox" id="agreeToTerms" {...register('agreeToTerms', { required: true })} />
+                        <input
+                            type="checkbox"
+                            id="agreeToTerms"
+                            {...register('agreeToTerms', {
+                                required: true,
+                            })}
+                        />
                         Agree to terms and conditions
                     </label>
                     {errors.agreeToTerms && <span>Please agree to the terms and conditions</span>}

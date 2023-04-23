@@ -39,8 +39,8 @@ async function createServer() {
         }
     });
 
-    app.listen(3501, () => {
-        console.log('http://localhost:3501');
+    app.listen(3500, () => {
+        console.log('http://localhost:3500');
     });
 }
 
