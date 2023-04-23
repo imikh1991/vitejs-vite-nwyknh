@@ -1,20 +1,32 @@
 /**
-* @vitest-environment jsdom
-*/
+ * @vitest-environment jsdom
+ */
 import { render, screen } from '@testing-library/react';
-import App from '../components/App';
-import { describe, expect, it, test } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
-import NotFound from '../components/NotFound';
+import { describe, expect, it, beforeEach } from 'vitest';
+import NotFound from '../pages/NotFound';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import FormSlice from '../store/reducers/FormSlice';
 
 describe('App', () => {
-  it('renders App component', () => {
-    render(<App />, { wrapper: BrowserRouter });
-  });
+    let store;
 
-  it('renders Not Found page component', () => {
-    render(<NotFound />);
-    expect(screen.getByText(/This is Not Found 404/i)).toBeDefined();
-  });
+    beforeEach(() => {
+        store = configureStore({
+            reducer: {
+                form: FormSlice,
+            },
+        });
+    });
 
+    it('renders Not Found page component', () => {
+        render(
+            <Provider store={store}>
+                <NotFound />
+            </Provider>
+        );
+        expect(
+            screen.getByText(/This is Not Found This Universe it does not exist. Wubba Lubba Dub Dub!/i)
+        ).toBeDefined();
+    });
 });

@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>React-SSR</title>
   </head>
+  <!-- <link rel="stylesheet" href="src/index.scss" /> -->
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/components/main.tsx"></script>
+    <div id="app"><!--app-html--></div>
+    <script type="module" src="./src/entry-client.tsx"></script>
   </body>
 </html>
