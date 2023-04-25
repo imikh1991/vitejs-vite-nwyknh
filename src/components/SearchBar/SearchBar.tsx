@@ -21,7 +21,7 @@ const SearchBar: React.FC<SearchProps> = ({ value, onSearchChange, handleClick }
                     value={value}
                 />
 
-                <button type="submit" name="search" className="searchButton" disabled={false}>
+                <button type="submit" name="search" className="searchButton" disabled={true}>
                     <SearchLogo />
                 </button>
             </div>

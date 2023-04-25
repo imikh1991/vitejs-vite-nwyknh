@@ -12,7 +12,7 @@ function Header() {
                             <ReactLogo />
                         </li>
                         <li className="nav-tab">
-                            <NavLink to="/main">Home</NavLink>
+                            <NavLink to="/">Home</NavLink>
                         </li>
                         <li className="nav-tab">
                             <NavLink to="/about">About </NavLink>

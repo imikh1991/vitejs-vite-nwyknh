@@ -25,13 +25,20 @@ async function createServer() {
             template = await vite.transformIndexHtml(url, template);
             // 3. Load the server entry.
             const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
-            // 4. render the app HTML.
-            const appHtml = await render(url);
-            // 5. Inject the app-rendered HTML into the template.
-            const html = template.replace(`<!--app-html-->`, appHtml);
-
-            // 6. Send the rendered HTML back.
-            res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+            // 4. Inject the app-rendered HTML into the template.
+            const html = template.split(`<!--app-html-->`);
+            // 5. Create pipe
+            const { pipe } = await render(url, {
+                onShellReady() {
+                    res.write(html[0]);
+                    pipe(res);
+                },
+                onAllReady() {
+                    res.write(html[0] + html[1]);
+                    res.end();
+                },
+            });
+            
         } catch (e) {
             // If an error is caught, let Vite fix the stack trace so it maps back
             // to your actual source code.
@@ -40,7 +47,7 @@ async function createServer() {
     });
 
     app.listen(3500, () => {
-        console.log('http://localhost:3500');
+        console.log('http://localhost:3500/');
     });
 }
 

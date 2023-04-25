@@ -88,7 +88,7 @@ function Form() {
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" {...register('name', { required: true })} />
-                    {errors.name && <span>This field is required</span>}
+                    {errors.name && <span className='label--error'>This field is required</span>}
                 </div>
 
                 <div>

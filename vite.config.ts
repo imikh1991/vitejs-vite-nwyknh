@@ -12,7 +12,7 @@ export default defineConfig({
     // svgr(),
         react(),
         istanbul({
-            // cypress: true,
+            cypress: true,
             requireEnv: false,
         }),
     ],

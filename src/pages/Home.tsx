@@ -1,7 +1,6 @@
 import React from 'react';
 import ContainerCards from '../components/ContainerCards/ContainerCards';
 import SearchBar from '../components/SearchBar/SearchBar';
-import '../main.css';
 import '../pages/Home.css';
 import '../components/Header/Header.css';
 import '../components/SearchBar/SearchBar.css';
@@ -9,7 +8,6 @@ import '../components/Form/Form.css';
 import '../components/Modal/Modal.css';
 import { useGetCharacterByNameQuery } from '../requests/createApi';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import ProgressBar from '../components/ProgressBar/ProgressBar';
 import { ApiResponse } from '../models/types';
 import { searchValueSelector } from '../store/selectors/search';
 import { setSearch, setCharacter } from '../store/reducers/SearchSlice';
@@ -52,9 +50,7 @@ function Home() {
     return (
         <div className="Home">
             <SearchBar value={search} onSearchChange={handleSearchChange} handleClick={handleClick} />
-            {isLoading && <ProgressBar />}
             <ContainerCards data={character?.results} open={handlerClickedData} loading={isLoading} />
-
             {modal && (
                 <Modal onClose={closeModal} title={'HERO'}>
                     <CardData id={clickedData} />
