@@ -20,7 +20,7 @@ function Form() {
     const defaultValues = useMemo(
         () => ({
             name: '',
-            picture: new DataTransfer().files,
+            picture: '',
             dateOfBirth: '',
             gender: '',
             agreeToTerms: false,
@@ -40,13 +40,12 @@ function Form() {
 
     const onSubmit = (data: FormData, event) => {
         try {
-            console.log(typeof data);
             setData((prevData) => [...prevData, data]);
             alert('Form successfully submitted');
             dispatch(addCharacter(data));
             event.preventDefault();
         } catch (e) {
-            console.error(e);
+            alert(e);
         }
     };
 
@@ -70,10 +69,7 @@ function Form() {
 
     React.useEffect(() => {
         if (isSubmitSuccessful) {
-            console.log('SubmitSuccessful');
-            // reset();
-            // код супер колхозный но умнее не могу придумать ничего :(
-            console.log(formIsSubmitted);
+            alert('SubmitSuccessful');
             setData(formIsSubmitted);
         }
     }, [isSubmitSuccessful, reset, defaultValues, formIsSubmitted]);

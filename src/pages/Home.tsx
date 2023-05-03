@@ -20,11 +20,11 @@ function Home() {
 
     const [enterSearch, setEnterSearch] = React.useState(search);
 
-    const { data: character, error, isLoading } = useGetCharacterByNameQuery(search);
+    const { data: character, isLoading } = useGetCharacterByNameQuery(search);
 
     const handleSearchChange = (value: string) => dispatch(setSearch(value));
 
-    // dispatch работает в связке с событием которое нужно обработать
+    
     const dispatch = useAppDispatch();
 
     const { openModal, closeModal, modal } = useModal();
@@ -43,9 +43,7 @@ function Home() {
         openModal();
         setClickedData(id as string);
     };
-    if (error) {
-        console.log('useGetCharacterByNameQuery error>>>', error);
-    }
+
 
     return (
         <div className="Home">

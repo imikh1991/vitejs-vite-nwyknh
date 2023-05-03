@@ -10,15 +10,12 @@ interface CardDataProps {
     id: string | number | null;
 }
 const CardData: React.FC<CardDataProps> = ({ id }) => {
-    const { loading, data, request } = useHttp<ICharacter>();
+    const { data, request } = useHttp<ICharacter>();
 
     useMount(() => {
         request(idRequest(id as string));
     });
-    if (loading) {
-        console.log(loading);
-    }
-
+   
     return (
         <>
             <div className="card" data-testid="card">
