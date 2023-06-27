@@ -8,21 +8,19 @@ import './App.css';
 
 function App() {
     return (
-      
         <div className="container" data-testid="app">
             <div className="App-header">
                 <Header />
             </div>
             <div className="app-container">
                 <Routes>
-                    <Route index element={<Home />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/form" element={<FormPage />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="about" element={<AboutPage />} />
+                    <Route path="form" element={<FormPage />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
         </div>
-
     );
 }
 
