@@ -7,9 +7,6 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-
     "lint": "npx eslint src/ --ext .tsx",
     "lint:fix": "npx eslint src/ --ext .tsx --fix",
     "vi:test": "vitest --ui",
