@@ -24,7 +24,6 @@ function Home() {
 
     const handleSearchChange = (value: string) => dispatch(setSearch(value));
 
-    
     const dispatch = useAppDispatch();
 
     const { openModal, closeModal, modal } = useModal();
